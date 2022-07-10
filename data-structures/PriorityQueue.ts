@@ -8,6 +8,15 @@ class QueueItem<T = any> {
   }
 }
 
+class Locator<T = any> extends QueueItem<T> {
+  heapIndex: number;
+
+  constructor(priority: Priority, value: T, heapIndex: number) {
+    super(priority, value);
+    this.heapIndex = heapIndex;
+  }
+}
+
 abstract class PriorityQueue {
   abstract getLength(): number;
 
@@ -17,7 +26,7 @@ abstract class PriorityQueue {
 }
 
 class HeapPriorityQueue<T = any> extends PriorityQueue {
-  private heap: QueueItem<T>[] = [];
+  protected heap: QueueItem<T>[] = [];
 
   getLength(): number {
     return this.heap.length;
@@ -49,7 +58,7 @@ class HeapPriorityQueue<T = any> extends PriorityQueue {
     return [priority, value];
   }
 
-  private bubbleUpHeap(itemIndex: number) {
+  protected bubbleUpHeap(itemIndex: number) {
     if (itemIndex === 0) {
       return;
     }
@@ -61,7 +70,7 @@ class HeapPriorityQueue<T = any> extends PriorityQueue {
     }
   }
 
-  private bubbleDownHeap(itemIndex: number) {
+  protected bubbleDownHeap(itemIndex: number) {
     if (!this.hasLeftChild(itemIndex)) {
       return;
     }
@@ -89,14 +98,14 @@ class HeapPriorityQueue<T = any> extends PriorityQueue {
     }
   }
 
-  private swapItems(sourceIndex: number, targetIndex: number) {
+  protected swapItems(sourceIndex: number, targetIndex: number) {
     const sourceItem = this.heap[sourceIndex];
     const targetItem = this.heap[targetIndex];
     this.heap[sourceIndex] = targetItem;
     this.heap[targetIndex] = sourceItem;
   }
 
-  private getParentIndex(childIndex: number) {
+  protected getParentIndex(childIndex: number) {
     return Math.floor((childIndex - 1) / 2);
   }
 
@@ -114,5 +123,64 @@ class HeapPriorityQueue<T = any> extends PriorityQueue {
 
   private hasRightChild(parentIndex: number) {
     return this.getRightChildIndex(parentIndex) < this.heap.length;
+  }
+}
+
+class AdaptableHeapPriorityQueue<T = any> extends HeapPriorityQueue<T> {
+  protected heap: Locator<T>[] = [];
+
+  add(priority: Priority, value: T) {
+    const locator = new Locator(priority, value, this.heap.length);
+    this.heap.push(locator);
+    this.bubbleUpHeap(this.heap.length - 1);
+    return locator;
+  }
+
+  update(locator: Locator, newPriority: Priority, newValue: T) {
+    const currentHeapIndex = locator.heapIndex;
+    if (
+      currentHeapIndex < 0 ||
+      currentHeapIndex >= this.heap.length ||
+      this.heap[currentHeapIndex] !== locator
+    ) {
+      throw new Error('Invalid locator');
+    }
+    locator.priority = newPriority;
+    locator.value = newValue;
+    this.bubble(currentHeapIndex);
+  }
+
+  remove(locator: Locator): [Priority, T] {
+    const currentHeapIndex = locator.heapIndex;
+    if (
+      currentHeapIndex < 0 ||
+      currentHeapIndex >= this.heap.length ||
+      this.heap[currentHeapIndex] !== locator
+    ) {
+      throw new Error('Invalid locator');
+    }
+    if (currentHeapIndex === this.heap.length - 1) {
+      this.heap.pop();
+    } else {
+      this.swapItems(currentHeapIndex, this.heap.length - 1);
+      this.heap.pop();
+      this.bubble(currentHeapIndex);
+    }
+    return [locator.priority, locator.value];
+  }
+
+  protected swapItems(sourceIndex: number, targetIndex: number): void {
+    super.swapItems(sourceIndex, targetIndex);
+    this.heap[sourceIndex].heapIndex = sourceIndex;
+    this.heap[targetIndex].heapIndex = targetIndex;
+  }
+
+  private bubble(itemIndex: number) {
+    const parentIndex = this.getParentIndex(itemIndex);
+    if (this.heap[itemIndex].hasHigherPriority(this.heap[parentIndex])) {
+      this.bubbleUpHeap(itemIndex);
+    } else {
+      this.bubbleDownHeap(itemIndex);
+    }
   }
 }
