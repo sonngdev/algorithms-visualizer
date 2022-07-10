@@ -8,7 +8,7 @@ class QueueItem<T = any> {
   }
 }
 
-class Locator<T = any> extends QueueItem<T> {
+export class Locator<T = any> extends QueueItem<T> {
   heapIndex: number;
 
   constructor(priority: Priority, value: T, heapIndex: number) {
@@ -126,7 +126,7 @@ class HeapPriorityQueue<T = any> extends PriorityQueue {
   }
 }
 
-class AdaptableHeapPriorityQueue<T = any> extends HeapPriorityQueue<T> {
+export class AdaptableHeapPriorityQueue<T = any> extends HeapPriorityQueue<T> {
   protected heap: Locator<T>[] = [];
 
   add(priority: Priority, value: T) {
