@@ -1,43 +1,45 @@
-import { useState } from 'react'
-import logo from './logo.svg'
+import { useMemo, useState } from 'react';
 import './App.css'
+import Node, { NodeType } from './Node';
+
+type NodeState = {
+  isVisited: boolean;
+  isOnPath: boolean;
+}
+
+const NUM_ROWS = 20;
+const NUM_COLS = 50;
 
 function App() {
-  const [count, setCount] = useState(0)
+  const initialNodeStates = useMemo(() => {
+    const states: NodeState[][] = [];
+    for (let i = 0; i < NUM_ROWS; i++) {
+      const row: NodeState[] = [];
+      for (let j = 0; j < NUM_COLS; j++) {
+        row.push({ isVisited: false, isOnPath: true });
+      }
+      states.push(row);
+    }
+    return states;
+  }, [NUM_ROWS, NUM_COLS]);
+  const [nodeStates, setNodeStates] = useState(initialNodeStates);
 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
-        <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>App.tsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {' | '}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
-      </header>
+      <div className="grid">
+        {nodeStates.map((row, rowIndex) => (
+          <div className="row" key={rowIndex}>
+            {row.map((node, colIndex) => (
+              <Node
+                key={`node-${rowIndex}-${colIndex}`}
+                type={NodeType.MIDDLE}
+                isVisited={false}
+                isOnPath={false}
+              />
+            ))}
+          </div>
+        ))}
+      </div>
     </div>
   )
 }
