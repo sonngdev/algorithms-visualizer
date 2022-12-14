@@ -9,6 +9,8 @@ type NodeState = {
 
 const NUM_ROWS = 20;
 const NUM_COLS = 50;
+const START_NODE = { row: 9, col: 10 };
+const END_NODE = { row: 9, col: 40 }
 
 function App() {
   const initialNodeStates = useMemo(() => {
@@ -28,14 +30,25 @@ function App() {
     <div className="App">
       <div className="grid" style={{ gridTemplateRows: `repeat(${NUM_ROWS}, 1fr)`, gridTemplateColumns: `repeat(${NUM_COLS}, 1fr)` }}>
         {nodeStates.map((row, rowIndex) => (
-          row.map((node, colIndex) => (
-            <Node
-              key={`node-${rowIndex}-${colIndex}`}
-              type={NodeType.MIDDLE}
-              isVisited={false}
-              isOnPath={false}
-            />
-          ))
+          row.map((node, colIndex) => {
+            let type: NodeType;
+            if (rowIndex === START_NODE.row && colIndex === START_NODE.col) {
+              type = NodeType.START;
+            } else if (rowIndex === END_NODE.row && colIndex === END_NODE.col) {
+              type = NodeType.END;
+            } else {
+              type = NodeType.MIDDLE;
+            }
+
+            return (
+              <Node
+                key={`node-${rowIndex}-${colIndex}`}
+                type={type}
+                isVisited={rowIndex === 3}
+                isOnPath={colIndex === 5}
+              />
+            )
+          })
         ))}
       </div>
     </div>

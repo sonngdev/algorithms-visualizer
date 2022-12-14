@@ -1,6 +1,22 @@
 .node {
   --node-width: 1.5vw;
-  background: lightgray;
+  background: #E6E6EA;
   width: var(--node-width);
   height: var(--node-width);
+}
+
+.node.start {
+  background-color: #FF6F68;
+}
+
+.node.end {
+  background-color: #88D8B0;
+}
+
+.node.visited {
+  background-color: #FFEEAD;
+}
+
+.node.on-path {
+  background-color: #FFCC5C;
 }
