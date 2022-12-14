@@ -26,18 +26,16 @@ function App() {
 
   return (
     <div className="App">
-      <div className="grid">
+      <div className="grid" style={{ gridTemplateRows: `repeat(${NUM_ROWS}, 1fr)`, gridTemplateColumns: `repeat(${NUM_COLS}, 1fr)` }}>
         {nodeStates.map((row, rowIndex) => (
-          <div className="row" key={rowIndex}>
-            {row.map((node, colIndex) => (
-              <Node
-                key={`node-${rowIndex}-${colIndex}`}
-                type={NodeType.MIDDLE}
-                isVisited={false}
-                isOnPath={false}
-              />
-            ))}
-          </div>
+          row.map((node, colIndex) => (
+            <Node
+              key={`node-${rowIndex}-${colIndex}`}
+              type={NodeType.MIDDLE}
+              isVisited={false}
+              isOnPath={false}
+            />
+          ))
         ))}
       </div>
     </div>

@@ -1,7 +1,6 @@
 .node {
   --node-width: 1.5vw;
-  border: solid 1px black;
+  background: lightgray;
   width: var(--node-width);
   height: var(--node-width);
-  display: inline-block;
 }
