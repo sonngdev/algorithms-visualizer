@@ -1,22 +1,38 @@
 .node {
   --node-width: 1.5vw;
-  background: #E6E6EA;
+  background-color: #E6E6EA;
   width: var(--node-width);
   height: var(--node-width);
 }
 
 .node.start {
-  background-color: #FF6F68;
+  background-color: #fe3e34;
 }
 
 .node.end {
-  background-color: #88D8B0;
+  background-color: #34d484;
 }
 
 .node.visited {
-  background-color: #FFEEAD;
+  background-color: #ffe88e;
 }
 
 .node.on-path {
-  background-color: #FFCC5C;
+  background-color: #f8bb37;
+}
+
+.node.under-drag-start {
+  background-color: #FF6F68;
+}
+
+.node.under-drag-end {
+  background-color: #88D8B0;
+}
+
+.node[draggable="true"] {
+  cursor: grab;
+}
+
+.node[draggable="true"]:active {
+  cursor: grabbing;
 }

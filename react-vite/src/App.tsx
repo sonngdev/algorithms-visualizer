@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { DragEventHandler, useMemo, useState } from 'react';
 import produce from 'immer';
 import Node, { NodeType } from './Node';
 import { Node as NodeDS } from '../../practical/data-structures/Node';
@@ -15,12 +15,19 @@ type NodeData = {
   col: number;
 }
 
+export type DragState = {
+  isActive: boolean;
+  nodeType: NodeType | null;
+  row: number;
+  col: number;
+}
+
 const NUM_ROWS = 20;
 const NUM_COLS = 50;
-const START_NODE = { row: 9, col: 20 };
-const END_NODE = { row: 9, col: 30 }
 
 function App() {
+  const [startNodePos, setStartNodePos] = useState({ row: 9, col: 20 });
+  const [endNodePos, setEndNodePos] = useState({ row: 9, col: 30 });
   const initialNodeStates = useMemo(() => {
     const states: NodeState[][] = [];
     for (let i = 0; i < NUM_ROWS; i++) {
@@ -33,6 +40,12 @@ function App() {
     return states;
   }, [NUM_ROWS, NUM_COLS]);
   const [nodeStates, setNodeStates] = useState(initialNodeStates);
+  const [dragState, setDragState] = useState<DragState>({
+    isActive: false,
+    nodeType: null,
+    row: 0,
+    col: 0,
+  });
 
   const createGridData = () => {
     let grid: NodeDS<NodeData>[][] = [];
@@ -56,9 +69,9 @@ function App() {
 
         row.push(node);
 
-        if (i === START_NODE.row && j === START_NODE.col) {
+        if (i === startNodePos.row && j === startNodePos.col) {
           startNode = node;
-        } else if (i === END_NODE.row && j === END_NODE.col) {
+        } else if (i === endNodePos.row && j === endNodePos.col) {
           endNode = node;
         }
       }
@@ -99,15 +112,47 @@ function App() {
     animateAlgorithm(visitedNodes, shortestPath);
   };
 
+  const handleDragStart = (nodeType: NodeType, row: number, col: number) => {
+    setNodeStates(initialNodeStates);
+    setDragState({ isActive: true, nodeType, row, col });
+  }
+
+  const handleDragEnter = (row: number, col: number) => {
+    setDragState({ ...dragState, row, col });
+  };
+
+  const handleDragOver: DragEventHandler<HTMLDivElement> = (event) => {
+    event.preventDefault();
+    event.dataTransfer.dropEffect = 'move';
+  };
+
+  const handleDrop: DragEventHandler<HTMLDivElement> = () => {
+    const { nodeType, row, col } = dragState;
+    if (nodeType === NodeType.START) {
+      setStartNodePos({ row: row, col: col });
+    } else if (nodeType === NodeType.END) {
+      setEndNodePos({ row: row, col: col });
+    }
+    setDragState({ isActive: false, nodeType: null, row: 0, col: 0 });
+  };
+
   return (
     <div className="App">
-      <div className="grid" style={{ gridTemplateRows: `repeat(${NUM_ROWS}, 1fr)`, gridTemplateColumns: `repeat(${NUM_COLS}, 1fr)` }}>
+      <div
+        className="grid"
+        style={{
+          gridTemplateRows: `repeat(${NUM_ROWS}, 1fr)`,
+          gridTemplateColumns: `repeat(${NUM_COLS}, 1fr)`,
+        }}
+        onDragOver={handleDragOver}
+        onDrop={handleDrop}
+      >
         {nodeStates.map((row, rowIndex) => (
           row.map((node, colIndex) => {
             let type: NodeType;
-            if (rowIndex === START_NODE.row && colIndex === START_NODE.col) {
+            if (rowIndex === startNodePos.row && colIndex === startNodePos.col) {
               type = NodeType.START;
-            } else if (rowIndex === END_NODE.row && colIndex === END_NODE.col) {
+            } else if (rowIndex === endNodePos.row && colIndex === endNodePos.col) {
               type = NodeType.END;
             } else {
               type = NodeType.MIDDLE;
@@ -117,9 +162,14 @@ function App() {
             return (
               <Node
                 key={`node-${rowIndex}-${colIndex}`}
+                row={rowIndex}
+                col={colIndex}
                 type={type}
                 isVisited={isVisited}
                 isOnPath={isOnPath}
+                dragState={dragState}
+                onDragStart={handleDragStart}
+                onDragEnter={handleDragEnter}
               />
             )
           })
