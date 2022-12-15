@@ -34,9 +34,7 @@ function App() {
   }, [NUM_ROWS, NUM_COLS]);
   const [nodeStates, setNodeStates] = useState(initialNodeStates);
 
-  const findShortestPath = () => {
-    setNodeStates(initialNodeStates);
-
+  const createGridData = () => {
     let grid: NodeDS<NodeData>[][] = [];
     let startNode: NodeDS<NodeData> | null = null;
     let endNode: NodeDS<NodeData> | null = null;
@@ -66,12 +64,10 @@ function App() {
       }
       grid.push(row);
     }
-    if (!startNode || !endNode) {
-      return;
-    }
+    return { grid, startNode, endNode };
+  }
 
-    const { visitedNodes, shortestPath } = performDijkstraAlgorithm(grid.flat(), startNode, endNode);
-
+  const animateAlgorithm = (visitedNodes: NodeDS<NodeData>[], shortestPath: NodeDS<NodeData>[]) => {
     for (let i = 0; i < visitedNodes.length; i++) {
       setTimeout(() => {
         const { data: { row, col } } = visitedNodes[i];
@@ -89,6 +85,18 @@ function App() {
         }));
       }, (visitedNodes.length + i) * 10);
     }
+  }
+
+  const findShortestPath = () => {
+    setNodeStates(initialNodeStates);
+
+    const { grid, startNode, endNode } = createGridData();
+    if (!startNode || !endNode) {
+      return;
+    }
+
+    const { visitedNodes, shortestPath } = performDijkstraAlgorithm(grid.flat(), startNode, endNode);
+    animateAlgorithm(visitedNodes, shortestPath);
   };
 
   return (
