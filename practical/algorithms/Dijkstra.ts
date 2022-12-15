@@ -1,17 +1,17 @@
 import { Node } from '../data-structures/Node';
 
-interface DijkstraResult {
-  shortestPath: Node[];
-  visitedNodes: Node[];
+interface DijkstraResult<T> {
+  shortestPath: Node<T>[];
+  visitedNodes: Node<T>[];
 }
 
-export default function performDijkstraAlgorithm(
-  grid: Node[],
-  originNode: Node,
-  destinationNode: Node,
-): DijkstraResult {
-  const shortestPath: Node[] = [];
-  const visitedNodes: Node[] = [];
+export default function performDijkstraAlgorithm<T = any>(
+  grid: Node<T>[],
+  originNode: Node<T>,
+  destinationNode: Node<T>,
+): DijkstraResult<T> {
+  const shortestPath: Node<T>[] = [];
+  const visitedNodes: Node<T>[] = [];
 
   for (let node of grid) {
     node.distance = node === originNode ? 0 : Infinity;
@@ -26,7 +26,7 @@ export default function performDijkstraAlgorithm(
     node.previousNode = null;
   }
 
-  const unvisitedNodes = grid.slice()
+  const unvisitedNodes = grid.slice();
 
   while (unvisitedNodes.length > 0) {
     unvisitedNodes.sort((node1, node2) => node1.distance - node2.distance);
@@ -44,7 +44,9 @@ export default function performDijkstraAlgorithm(
       break;
     }
 
-    const unvisitedNeighbors = closestNode.neighbors.filter((node) => !node.isVisited);
+    const unvisitedNeighbors = closestNode.neighbors.filter(
+      (node) => !node.isVisited,
+    );
     for (let neighbor of unvisitedNeighbors) {
       neighbor.distance = closestNode.distance + 1;
       neighbor.previousNode = closestNode;
