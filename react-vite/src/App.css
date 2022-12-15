@@ -5,3 +5,7 @@
   column-gap: var(--grid-gap);
   width: fit-content;
 }
+
+button.action {
+  margin-top: 1rem;
+}
