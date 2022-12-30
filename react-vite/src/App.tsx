@@ -27,7 +27,7 @@ const NUM_COLS = 50;
 
 function App() {
   const [startNodePos, setStartNodePos] = useState({ row: 9, col: 20 });
-  const [endNodePos, setEndNodePos] = useState({ row: 9, col: 30 });
+  const [endNodePos, setEndNodePos] = useState({ row: 9, col: 29 });
   const initialNodeStates = useMemo(() => {
     const states: NodeState[][] = [];
     for (let i = 0; i < NUM_ROWS; i++) {
@@ -87,7 +87,7 @@ function App() {
         setNodeStates(produce((draft) => {
           draft[row][col].isVisited = true;
         }));
-      }, i * 10);
+      }, i * 5);
     }
 
     for (let i = 0; i < shortestPath.length; i++) {
@@ -96,7 +96,7 @@ function App() {
         setNodeStates(produce((draft) => {
           draft[row][col].isOnPath = true;
         }));
-      }, (visitedNodes.length + i) * 10);
+      }, (visitedNodes.length + i * 4) * 5); // Slow down shortest path animation by 4 times
     }
   }
 
