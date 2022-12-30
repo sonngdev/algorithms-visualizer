@@ -9,6 +9,17 @@
   font-family: 'Righteous';
 }
 
+.legends {
+  display: flex;
+  column-gap: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.legend-group {
+  display: flex;
+  column-gap: 0.5rem;
+}
+
 .grid {
   --grid-gap: 0.2vw;
   display: grid;
@@ -17,7 +28,7 @@
   width: fit-content;
 }
 
-button.action {
+.action {
   margin-top: 2rem;
   text-transform: uppercase;
   border: solid 1px black;
@@ -29,7 +40,7 @@ button.action {
   transform: translate(-3px, -3px);
 }
 
-button.action:hover {
+.action:hover {
   box-shadow: 3px 3px 0 0;
   transform: translate(-6px, -6px);
 }

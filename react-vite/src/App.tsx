@@ -139,6 +139,30 @@ function App() {
   return (
     <div className="App">
       <h1 className="title">Algorithm Visualizer</h1>
+
+      <div className="legends">
+        <div className="legend-group">
+          <div className="node start"></div>
+          <span>Start node</span>
+        </div>
+        <div className="legend-group">
+          <div className="node end"></div>
+          <span>End node</span>
+        </div>
+        <div className="legend-group">
+          <div className="node"></div>
+          <span>Unvisited node</span>
+        </div>
+        <div className="legend-group">
+          <div className="node visited"></div>
+          <span>Visited node</span>
+        </div>
+        <div className="legend-group">
+          <div className="node on-path"></div>
+          <span>Shortest-path node</span>
+        </div>
+      </div>
+
       <div
         className="grid"
         style={{
