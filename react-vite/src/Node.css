@@ -1,6 +1,6 @@
 .node {
   --node-width: 1.5vw;
-  background-color: #E6E6EA;
+  border: solid 1px black;
   width: var(--node-width);
   height: var(--node-width);
 }

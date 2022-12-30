@@ -1,3 +1,14 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  font-weight: normal;
+  font-family: 'Righteous';
+}
+
 .grid {
   --grid-gap: 0.2vw;
   display: grid;
@@ -7,5 +18,18 @@
 }
 
 button.action {
-  margin-top: 1rem;
+  margin-top: 2rem;
+  text-transform: uppercase;
+  border: solid 1px black;
+  background-color: transparent;
+  padding: 1rem;
+  cursor: pointer;
+  transition: all ease-in-out 0.1s;
+  box-shadow: 0 0 0 0;
+  transform: translate(-3px, -3px);
+}
+
+button.action:hover {
+  box-shadow: 3px 3px 0 0;
+  transform: translate(-6px, -6px);
 }
