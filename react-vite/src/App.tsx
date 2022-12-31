@@ -138,7 +138,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1 className="title">Algorithm Visualizer</h1>
+      <h1 className="title">Pathfinding Algorithms Visualizer</h1>
 
       <div className="legends">
         <div className="legend-group">
