@@ -47,6 +47,10 @@ function App() {
     col: 0,
   });
 
+  const resetNodeStates = () => {
+    setNodeStates(initialNodeStates);
+  };
+
   const createGridData = () => {
     let grid: NodeDS<NodeData>[][] = [];
     let startNode: NodeDS<NodeData> | null = null;
@@ -101,7 +105,7 @@ function App() {
   }
 
   const findShortestPath = () => {
-    setNodeStates(initialNodeStates);
+    resetNodeStates();
 
     const { grid, startNode, endNode } = createGridData();
     if (!startNode || !endNode) {
@@ -113,7 +117,7 @@ function App() {
   };
 
   const handleDragStart = (nodeType: NodeType, row: number, col: number) => {
-    setNodeStates(initialNodeStates);
+    resetNodeStates();
     setDragState({ isActive: true, nodeType, row, col });
   }
 
@@ -169,6 +173,7 @@ function App() {
           gridTemplateRows: `repeat(${NUM_ROWS}, 1fr)`,
           gridTemplateColumns: `repeat(${NUM_COLS}, 1fr)`,
         }}
+        onClick={resetNodeStates}
         onDragOver={handleDragOver}
         onDrop={handleDrop}
       >
