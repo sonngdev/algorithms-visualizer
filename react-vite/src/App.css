@@ -9,8 +9,21 @@
   font-family: 'Righteous';
 }
 
+.main {
+  display: grid;
+  column-gap: 2rem;
+  grid-template-areas:
+    "legends sidebar"
+    "grid sidebar";
+  grid-template-rows: fit-content;
+  grid-template-columns: 3fr 1fr;
+}
+
 .legends {
+  grid-area: legends;
   display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
   column-gap: 1.5rem;
   margin-bottom: 1rem;
 }
@@ -18,29 +31,39 @@
 .legend-group {
   display: flex;
   column-gap: 0.5rem;
+  align-items: center;
 }
 
 .grid {
   --grid-gap: 0.2vw;
+  grid-area: grid;
   display: grid;
   row-gap: var(--grid-gap);
   column-gap: var(--grid-gap);
   width: fit-content;
 }
 
+.sidebar {
+  grid-area: sidebar;
+}
+
+.subtitle {
+  font-size: 1rem;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+}
+
 .action {
-  margin-top: 2rem;
-  text-transform: uppercase;
   border: solid 1px black;
   background-color: transparent;
   padding: 1rem;
   cursor: pointer;
   transition: all ease-in-out 0.1s;
   box-shadow: 0 0 0 0;
-  transform: translate(-3px, -3px);
+  transform: translate(0, 0);
 }
 
 .action:hover {
   box-shadow: 3px 3px 0 0;
-  transform: translate(-6px, -6px);
+  transform: translate(-3px, -3px);
 }

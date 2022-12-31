@@ -23,11 +23,11 @@ export type DragState = {
 }
 
 const NUM_ROWS = 20;
-const NUM_COLS = 50;
+const NUM_COLS = 35;
 
 function App() {
-  const [startNodePos, setStartNodePos] = useState({ row: 9, col: 20 });
-  const [endNodePos, setEndNodePos] = useState({ row: 9, col: 29 });
+  const [startNodePos, setStartNodePos] = useState({ row: 9, col: 12 });
+  const [endNodePos, setEndNodePos] = useState({ row: 9, col: 22 });
   const initialNodeStates = useMemo(() => {
     const states: NodeState[][] = [];
     for (let i = 0; i < NUM_ROWS; i++) {
@@ -144,75 +144,80 @@ function App() {
     <div className="App">
       <h1 className="title">Pathfinding Algorithms Visualizer</h1>
 
-      <div className="legends">
-        <div className="legend-group">
-          <div className="node start"></div>
-          <span>Start node</span>
+      <div className="main">
+        <div className="legends">
+          <div className="legend-group">
+            <div className="node start"></div>
+            <span>Start node</span>
+          </div>
+          <div className="legend-group">
+            <div className="node end"></div>
+            <span>End node</span>
+          </div>
+          <div className="legend-group">
+            <div className="node"></div>
+            <span>Unvisited node</span>
+          </div>
+          <div className="legend-group">
+            <div className="node visited"></div>
+            <span>Visited node</span>
+          </div>
+          <div className="legend-group">
+            <div className="node on-path"></div>
+            <span>Shortest-path node</span>
+          </div>
         </div>
-        <div className="legend-group">
-          <div className="node end"></div>
-          <span>End node</span>
+
+        <div
+          className="grid"
+          style={{
+            gridTemplateRows: `repeat(${NUM_ROWS}, 1fr)`,
+            gridTemplateColumns: `repeat(${NUM_COLS}, 1fr)`,
+          }}
+          onClick={resetNodeStates}
+          onDragOver={handleDragOver}
+          onDrop={handleDrop}
+        >
+          {nodeStates.map((row, rowIndex) => (
+            row.map((node, colIndex) => {
+              let type: NodeType;
+              if (rowIndex === startNodePos.row && colIndex === startNodePos.col) {
+                type = NodeType.START;
+              } else if (rowIndex === endNodePos.row && colIndex === endNodePos.col) {
+                type = NodeType.END;
+              } else {
+                type = NodeType.MIDDLE;
+              }
+              const { isVisited, isOnPath } = node;
+
+              return (
+                <Node
+                  key={`node-${rowIndex}-${colIndex}`}
+                  row={rowIndex}
+                  col={colIndex}
+                  type={type}
+                  isVisited={isVisited}
+                  isOnPath={isOnPath}
+                  dragState={dragState}
+                  onDragStart={handleDragStart}
+                  onDragEnter={handleDragEnter}
+                />
+              )
+            })
+          ))}
         </div>
-        <div className="legend-group">
-          <div className="node"></div>
-          <span>Unvisited node</span>
-        </div>
-        <div className="legend-group">
-          <div className="node visited"></div>
-          <span>Visited node</span>
-        </div>
-        <div className="legend-group">
-          <div className="node on-path"></div>
-          <span>Shortest-path node</span>
+
+        <div className="sidebar">
+          <h2 className="subtitle">Visualize:</h2>
+          <button
+            type="button"
+            className="action"
+            onClick={findShortestPath}
+          >
+            Dijkstra's Algorithm
+          </button>
         </div>
       </div>
-
-      <div
-        className="grid"
-        style={{
-          gridTemplateRows: `repeat(${NUM_ROWS}, 1fr)`,
-          gridTemplateColumns: `repeat(${NUM_COLS}, 1fr)`,
-        }}
-        onClick={resetNodeStates}
-        onDragOver={handleDragOver}
-        onDrop={handleDrop}
-      >
-        {nodeStates.map((row, rowIndex) => (
-          row.map((node, colIndex) => {
-            let type: NodeType;
-            if (rowIndex === startNodePos.row && colIndex === startNodePos.col) {
-              type = NodeType.START;
-            } else if (rowIndex === endNodePos.row && colIndex === endNodePos.col) {
-              type = NodeType.END;
-            } else {
-              type = NodeType.MIDDLE;
-            }
-            const { isVisited, isOnPath } = node;
-
-            return (
-              <Node
-                key={`node-${rowIndex}-${colIndex}`}
-                row={rowIndex}
-                col={colIndex}
-                type={type}
-                isVisited={isVisited}
-                isOnPath={isOnPath}
-                dragState={dragState}
-                onDragStart={handleDragStart}
-                onDragEnter={handleDragEnter}
-              />
-            )
-          })
-        ))}
-      </div>
-
-      <button
-        type="button"
-        className="action"
-        onClick={findShortestPath}
-      >
-        Find shortest path
-      </button>
     </div>
   )
 }
