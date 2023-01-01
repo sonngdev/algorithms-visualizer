@@ -26,10 +26,12 @@ export type DragState = {
 
 const NUM_ROWS = 20;
 const NUM_COLS = 35;
+const DEFAULT_START_NODE_POS = { row: 9, col: 12 };
+const DEFAULT_END_NODE_POS = { row: 9, col: 22 };
 
 function App() {
-  const [startNodePos, setStartNodePos] = useState({ row: 9, col: 12 });
-  const [endNodePos, setEndNodePos] = useState({ row: 9, col: 22 });
+  const [startNodePos, setStartNodePos] = useState(DEFAULT_START_NODE_POS);
+  const [endNodePos, setEndNodePos] = useState(DEFAULT_END_NODE_POS);
   const initialNodeStates = useMemo(() => {
     const states: NodeState[][] = [];
     for (let i = 0; i < NUM_ROWS; i++) {
@@ -73,6 +75,14 @@ function App() {
     timeoutRef.current.forEach(clearTimeout);
     timeoutRef.current = [];
   };
+
+  const resetGrid = () => {
+    setStartNodePos(DEFAULT_START_NODE_POS);
+    setEndNodePos(DEFAULT_END_NODE_POS);
+    setNodeStates(initialNodeStates);
+    timeoutRef.current.forEach(clearTimeout);
+    timeoutRef.current = [];
+  }
 
   //-------------Visualizing pathfinding algorithm-------------//
 
@@ -340,6 +350,13 @@ function App() {
             onClick={resetNodeStates}
           >
             Clear walls
+          </button>
+          <button
+            type="button"
+            className="action minor"
+            onClick={resetGrid}
+          >
+            Reset grid
           </button>
         </div>
       </div>
