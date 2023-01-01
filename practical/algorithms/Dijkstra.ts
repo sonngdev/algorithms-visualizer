@@ -5,7 +5,60 @@ interface DijkstraResult<T> {
   visitedNodes: Node<T>[];
 }
 
-export default function performDijkstraAlgorithm<T = any>(
+interface DijkstraNodeData {
+  row: number;
+  col: number;
+}
+
+type NodeState = {
+  isVisited: boolean;
+  isOnPath: boolean;
+  isWall: boolean;
+}
+
+export function createGridData(
+  rows: number,
+  cols: number,
+  nodeStates: NodeState[][],
+  startNodePos: DijkstraNodeData,
+  endNodePos: DijkstraNodeData,
+) {
+  let grid: Node<DijkstraNodeData>[][] = [];
+  let startNode: Node<DijkstraNodeData> | null = null;
+  let endNode: Node<DijkstraNodeData> | null = null;
+
+  for (let i = 0; i < rows; i++) {
+    const row: Node<DijkstraNodeData>[] = [];
+    for (let j = 0; j < cols; j++) {
+      const node = new Node({ row: i, col: j });
+      if (nodeStates[i][j].isWall) {
+        node.isWall = true;
+      }
+      if (j > 0) {
+        const leftNode = row[j - 1];
+        node.neighbors.push(leftNode);
+        leftNode.neighbors.push(node);
+      }
+      if (i > 0) {
+        const topNode = grid[i - 1][j];
+        node.neighbors.push(topNode);
+        topNode.neighbors.push(node);
+      }
+
+      row.push(node);
+
+      if (i === startNodePos.row && j === startNodePos.col) {
+        startNode = node;
+      } else if (i === endNodePos.row && j === endNodePos.col) {
+        endNode = node;
+      }
+    }
+    grid.push(row);
+  }
+  return { grid, startNode, endNode };
+}
+
+export function performAlgorithm<T = any>(
   grid: Node<T>[],
   originNode: Node<T>,
   destinationNode: Node<T>,
@@ -68,3 +121,10 @@ export default function performDijkstraAlgorithm<T = any>(
 
   return { shortestPath, visitedNodes };
 }
+
+const Dijkstra = {
+  createGridData,
+  performAlgorithm,
+}
+
+export default Dijkstra;

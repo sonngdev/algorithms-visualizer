@@ -2,7 +2,7 @@ import { DragEventHandler, useMemo, useState } from 'react';
 import produce from 'immer';
 import Node, { NodeType } from './Node';
 import { Node as NodeDS } from '../../practical/data-structures/Node';
-import performDijkstraAlgorithm from '../../practical/algorithms/Dijkstra';
+import Dijkstra from '../../practical/algorithms/Dijkstra';
 import './App.css'
 
 type NodeState = {
@@ -68,42 +68,6 @@ function App() {
 
   //-------------Visualizing pathfinding algorithm-------------//
 
-  const createGridData = () => {
-    let grid: NodeDS<NodeData>[][] = [];
-    let startNode: NodeDS<NodeData> | null = null;
-    let endNode: NodeDS<NodeData> | null = null;
-
-    for (let i = 0; i < NUM_ROWS; i++) {
-      const row: NodeDS<NodeData>[] = [];
-      for (let j = 0; j < NUM_COLS; j++) {
-        const node = new NodeDS({ row: i, col: j });
-        if (nodeStates[i][j].isWall) {
-          node.isWall = true;
-        }
-        if (j > 0) {
-          const leftNode = row[j - 1];
-          node.neighbors.push(leftNode);
-          leftNode.neighbors.push(node);
-        }
-        if (i > 0) {
-          const topNode = grid[i - 1][j];
-          node.neighbors.push(topNode);
-          topNode.neighbors.push(node);
-        }
-
-        row.push(node);
-
-        if (i === startNodePos.row && j === startNodePos.col) {
-          startNode = node;
-        } else if (i === endNodePos.row && j === endNodePos.col) {
-          endNode = node;
-        }
-      }
-      grid.push(row);
-    }
-    return { grid, startNode, endNode };
-  }
-
   const animateAlgorithm = (visitedNodes: NodeDS<NodeData>[], shortestPath: NodeDS<NodeData>[]) => {
     for (let i = 0; i < visitedNodes.length; i++) {
       setTimeout(() => {
@@ -127,12 +91,12 @@ function App() {
   const findShortestPath = () => {
     clearVisualizedPath();
 
-    const { grid, startNode, endNode } = createGridData();
+    const { grid, startNode, endNode } = Dijkstra.createGridData(NUM_ROWS, NUM_COLS, nodeStates, startNodePos, endNodePos);
     if (!startNode || !endNode) {
       return;
     }
 
-    const { visitedNodes, shortestPath } = performDijkstraAlgorithm(grid.flat(), startNode, endNode);
+    const { visitedNodes, shortestPath } = Dijkstra.performAlgorithm(grid.flat(), startNode, endNode);
     animateAlgorithm(visitedNodes, shortestPath);
   };
 
@@ -284,6 +248,13 @@ function App() {
             onClick={findShortestPath}
           >
             Dijkstra's Algorithm
+          </button>
+          <button
+            type="button"
+            className="action"
+            onClick={findShortestPath}
+          >
+            A* Algorithm
           </button>
           <button
             type="button"
