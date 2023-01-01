@@ -297,7 +297,7 @@ function App() {
             className="action minor"
             onClick={resetNodeStates}
           >
-            Reset grid
+            Clear walls
           </button>
         </div>
       </div>
