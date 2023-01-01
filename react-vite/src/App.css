@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 0 4rem;
 }
 
 .title {
@@ -50,21 +51,6 @@
   width: fit-content;
 }
 
-.tips {
-  padding: 0 1rem;
-}
-
-.tips .subtitle {
-  font-size: 1rem;
-  margin-top: 1rem;
-  margin-bottom: 0.5rem;
-}
-
-.tips ul {
-  margin: 0;
-  font-size: 0.75rem;
-}
-
 .sidebar {
   grid-area: sidebar;
 }
@@ -75,9 +61,19 @@
   margin-bottom: 1.5rem;
 }
 
-.action.minor {
-  padding: 0.4rem;
-  font-size: 0.75rem;
+.algorithms {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.cleanup-buttons {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  column-gap: 0.5rem;
+  margin-bottom: 2rem;
 }
 
 .action {
@@ -93,4 +89,25 @@
 .action:hover {
   box-shadow: 3px 3px 0 0;
   transform: translate(-3px, -3px);
+}
+
+.action.minor {
+  padding: 0.4rem;
+  font-size: 0.75rem;
+  width: 100%;
+}
+
+.tips .subtitle {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.tips ul {
+  margin: 0;
+  font-size: 0.75rem;
+  padding-left: 1rem;
+}
+
+.tips ul li div {
+  margin-left: 0.3rem;
 }

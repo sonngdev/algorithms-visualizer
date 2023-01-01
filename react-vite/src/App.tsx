@@ -82,7 +82,7 @@ function App() {
     setNodeStates(initialNodeStates);
     timeoutRef.current.forEach(clearTimeout);
     timeoutRef.current = [];
-  }
+  };
 
   //-------------Visualizing pathfinding algorithm-------------//
 
@@ -96,7 +96,7 @@ function App() {
       }
     }
     return wallPositions;
-  }
+  };
 
   const animateAlgorithm = (
     visitedNodes: NodeDS<NodeData>[],
@@ -317,47 +317,62 @@ function App() {
           )}
         </div>
 
-        <div className="tips">
-          <h2 className="subtitle">💡 Tips:</h2>
-          <ul>
-            <li>Use desktop with a mouse for the best experience</li>
-            <li>Try dragging the start/end node to a new position</li>
-            <li>Click on a node to toggle a wall</li>
-            <li>
-              Hold Shift and left mouse at the same time to create walls quickly
-            </li>
-          </ul>
-        </div>
-
         <div className="sidebar">
           <h2 className="subtitle">Visualize:</h2>
-          <button type="button" className="action" onClick={visualizeDijkstra}>
-            Dijkstra's Algorithm
-          </button>
-          <button type="button" className="action" onClick={visualizeAStar}>
-            A* Algorithm
-          </button>
-          <button
-            type="button"
-            className="action minor"
-            onClick={clearVisualizedPath}
-          >
-            Clear path
-          </button>
-          <button
-            type="button"
-            className="action minor"
-            onClick={resetNodeStates}
-          >
-            Clear walls
-          </button>
-          <button
-            type="button"
-            className="action minor"
-            onClick={resetGrid}
-          >
-            Reset grid
-          </button>
+
+          <div className="algorithms">
+            <button
+              type="button"
+              className="action"
+              onClick={visualizeDijkstra}
+            >
+              Dijkstra's Algorithm
+            </button>
+            <button type="button" className="action" onClick={visualizeAStar}>
+              A* Algorithm
+            </button>
+          </div>
+
+          <div className="cleanup-buttons">
+            <button
+              type="button"
+              className="action minor"
+              onClick={clearVisualizedPath}
+            >
+              Clear path
+            </button>
+            <button
+              type="button"
+              className="action minor"
+              onClick={resetNodeStates}
+            >
+              Clear walls
+            </button>
+            <button type="button" className="action minor" onClick={resetGrid}>
+              Reset grid
+            </button>
+          </div>
+
+          <div className="tips">
+            <h2 className="subtitle">💡 Tips:</h2>
+            <ul>
+              <li>
+                <div>Use desktop with a mouse for the best experience</div>
+              </li>
+              <li>
+                <div>Try dragging the start/end node to a new position</div>
+              </li>
+              <li>
+                <div>Click on a node to toggle a wall</div>
+              </li>
+              <li>
+                <div>
+                  Hold Shift and left mouse at the same time to create walls
+                  quickly
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
