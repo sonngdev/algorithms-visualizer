@@ -47,6 +47,9 @@ function App() {
     row: 0,
     col: 0,
   });
+  const [isCreatingWall, setIsCreatingWall] = useState(false);
+
+  //-------------Helpers-------------//
 
   const clearVisualizedPath = () => {
     setNodeStates(produce((draft) => {
@@ -62,6 +65,8 @@ function App() {
   const resetNodeStates = () => {
     setNodeStates(initialNodeStates);
   };
+
+  //-------------Visualizing pathfinding algorithm-------------//
 
   const createGridData = () => {
     let grid: NodeDS<NodeData>[][] = [];
@@ -131,6 +136,8 @@ function App() {
     animateAlgorithm(visitedNodes, shortestPath);
   };
 
+  //-------------Moving start/end nodes-------------//
+
   const handleDragStart = (nodeType: NodeType, row: number, col: number) => {
     clearVisualizedPath();
     setDragState({ isActive: true, nodeType, row, col });
@@ -155,12 +162,34 @@ function App() {
     setDragState({ isActive: false, nodeType: null, row: 0, col: 0 });
   };
 
+  //-------------Creating walls-------------//
+
   const handleNodeClick = (row: number, col: number) => {
     clearVisualizedPath();
     setNodeStates(produce((draft) => {
       draft[row][col].isWall = !draft[row][col].isWall;
     }));
   };
+
+  const handleNodeMouseDown = (row: number, col: number) => {
+    clearVisualizedPath();
+    setIsCreatingWall(true);
+    setNodeStates(produce((draft) => {
+      draft[row][col].isWall = true;
+    }));
+  };
+
+  const handleNodeMouseEnter = (row: number, col: number) => {
+    if (isCreatingWall) {
+      setNodeStates(produce((draft) => {
+        draft[row][col].isWall = true;
+      }));
+    }
+  };
+
+  const handleNodeMouseUp = () => {
+    setIsCreatingWall(false);
+  }
 
   return (
     <div className="App">
@@ -228,6 +257,9 @@ function App() {
                   onDragStart={handleDragStart}
                   onDragEnter={handleDragEnter}
                   onClick={handleNodeClick}
+                  onMouseDown={handleNodeMouseDown}
+                  onMouseEnter={handleNodeMouseEnter}
+                  onMouseUp={handleNodeMouseUp}
                 />
               )
             })

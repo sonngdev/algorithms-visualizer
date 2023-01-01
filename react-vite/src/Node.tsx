@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { MouseEvent, useEffect, useState } from 'react';
 import { DragState } from './App';
 import './Node.css';
 
@@ -19,6 +19,9 @@ type NodeProps = {
   onDragStart: (nodeType: NodeType, row: number, col: number) => void,
   onDragEnter: (row: number, col: number) => void,
   onClick: (row: number, col: number) => void,
+  onMouseDown: (row: number, col: number) => void,
+  onMouseEnter: (row: number, col: number) => void,
+  onMouseUp: () => void,
 };
 
 export default function Node({
@@ -32,6 +35,9 @@ export default function Node({
   onDragStart,
   onDragEnter,
   onClick,
+  onMouseDown,
+  onMouseEnter,
+  onMouseUp,
 }: NodeProps) {
   const [isUnderDrag, setIsUnderDrag] = useState(false);
 
@@ -54,6 +60,8 @@ export default function Node({
     }
   }
 
+  //-------------Moving start/end nodes-------------//
+
   const handleDragStart = () => {
     onDragStart(type, row, col);
   }
@@ -69,11 +77,33 @@ export default function Node({
     setIsUnderDrag(false);
   };
 
-  const handleClick = () => {
-    if (type === NodeType.MIDDLE) {
+  //-------------Creating walls-------------//
+
+  // Click a node to toggle a wall
+  const handleClick = (event: MouseEvent<HTMLDivElement>) => {
+    if (type === NodeType.MIDDLE && !event.shiftKey) {
       onClick(row, col);
     }
   };
+
+  // Mouse down and drag to create walls quickly
+  const handleMouseDown = (event: MouseEvent<HTMLDivElement>) => {
+    if (type === NodeType.MIDDLE && event.shiftKey) {
+      onMouseDown(row, col);
+    }
+  };
+
+  const handleMouseEnter = (event: MouseEvent<HTMLDivElement>) => {
+    if (type === NodeType.MIDDLE && event.shiftKey) {
+      onMouseEnter(row, col);
+    }
+  }
+
+  const handleMouseUp = (event: MouseEvent<HTMLDivElement>) => {
+    if (event.shiftKey) {
+      onMouseUp();
+    }
+  }
 
   // Sometimes onDragLeave is not called, resulting in false nodes
   // being highlighted.
@@ -91,6 +121,9 @@ export default function Node({
       onDragEnter={handleDragEnter}
       onDragLeave={handleDragLeave}
       onClick={handleClick}
+      onMouseDown={handleMouseDown}
+      onMouseEnter={handleMouseEnter}
+      onMouseUp={handleMouseUp}
     />
   )
 }
