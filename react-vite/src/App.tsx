@@ -1,4 +1,4 @@
-import { DragEventHandler, useMemo, useState } from 'react';
+import { DragEventHandler, useMemo, useRef, useState } from 'react';
 import produce from 'immer';
 import Node, { NodeType } from './Node';
 import { Node as NodeDS } from '../../practical/data-structures/Node';
@@ -42,6 +42,7 @@ function App() {
     return states;
   }, [NUM_ROWS, NUM_COLS]);
   const [nodeStates, setNodeStates] = useState(initialNodeStates);
+  const timeoutRef = useRef<number[]>([]);
   const [dragState, setDragState] = useState<DragState>({
     isActive: false,
     nodeType: null,
@@ -63,10 +64,14 @@ function App() {
         }
       }),
     );
+    timeoutRef.current.forEach(clearTimeout);
+    timeoutRef.current = [];
   };
 
   const resetNodeStates = () => {
     setNodeStates(initialNodeStates);
+    timeoutRef.current.forEach(clearTimeout);
+    timeoutRef.current = [];
   };
 
   //-------------Visualizing pathfinding algorithm-------------//
@@ -88,7 +93,7 @@ function App() {
     shortestPath: NodeDS<NodeData>[],
   ) => {
     for (let i = 0; i < visitedNodes.length; i++) {
-      setTimeout(() => {
+      const timeout = setTimeout(() => {
         const {
           data: { row, col },
         } = visitedNodes[i];
@@ -98,10 +103,11 @@ function App() {
           }),
         );
       }, i * 5);
+      timeoutRef.current.push(timeout);
     }
 
     for (let i = 0; i < shortestPath.length; i++) {
-      setTimeout(() => {
+      const timeout = setTimeout(() => {
         const {
           data: { row, col },
         } = shortestPath[i];
@@ -111,6 +117,7 @@ function App() {
           }),
         );
       }, (visitedNodes.length + i * 4) * 5); // Slow down shortest path animation by 4 times
+      timeoutRef.current.push(timeout);
     }
   };
 
