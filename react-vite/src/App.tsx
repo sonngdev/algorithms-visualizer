@@ -174,7 +174,6 @@ function App() {
             gridTemplateRows: `repeat(${NUM_ROWS}, 1fr)`,
             gridTemplateColumns: `repeat(${NUM_COLS}, 1fr)`,
           }}
-          onClick={resetNodeStates}
           onDragOver={handleDragOver}
           onDrop={handleDrop}
         >
@@ -215,6 +214,13 @@ function App() {
             onClick={findShortestPath}
           >
             Dijkstra's Algorithm
+          </button>
+          <button
+            type="button"
+            className="action clear"
+            onClick={resetNodeStates}
+          >
+            Clear path
           </button>
         </div>
       </div>

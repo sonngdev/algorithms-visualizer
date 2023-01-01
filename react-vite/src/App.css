@@ -13,8 +13,8 @@
   display: grid;
   column-gap: 2rem;
   grid-template-areas:
-    "legends sidebar"
-    "grid sidebar";
+    'legends sidebar'
+    'grid sidebar';
   grid-template-rows: fit-content;
   grid-template-columns: 3fr 1fr;
 }
@@ -51,6 +51,11 @@
   font-size: 1rem;
   margin-top: 0;
   margin-bottom: 1.5rem;
+}
+
+.action.clear {
+  padding: 0.4rem;
+  font-size: 0.75rem;
 }
 
 .action {
