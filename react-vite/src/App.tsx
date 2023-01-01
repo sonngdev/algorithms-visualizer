@@ -3,6 +3,7 @@ import produce from 'immer';
 import Node, { NodeType } from './Node';
 import { Node as NodeDS } from '../../practical/data-structures/Node';
 import Dijkstra from '../../practical/algorithms/Dijkstra';
+import AStar from '../../practical/algorithms/AStar';
 import './App.css'
 
 type NodeState = {
@@ -88,7 +89,7 @@ function App() {
     }
   }
 
-  const findShortestPath = () => {
+  const visualizeDijkstra = () => {
     clearVisualizedPath();
 
     const { grid, startNode, endNode } = Dijkstra.createGridData(NUM_ROWS, NUM_COLS, nodeStates, startNodePos, endNodePos);
@@ -97,6 +98,18 @@ function App() {
     }
 
     const { visitedNodes, shortestPath } = Dijkstra.performAlgorithm(grid.flat(), startNode, endNode);
+    animateAlgorithm(visitedNodes, shortestPath);
+  };
+
+  const visualizeAStar = () => {
+    clearVisualizedPath();
+
+    const { grid, startNode, endNode } = AStar.createGridData(NUM_ROWS, NUM_COLS, nodeStates, startNodePos, endNodePos);
+    if (!startNode || !endNode) {
+      return;
+    }
+
+    const { visitedNodes, shortestPath } = AStar.performAlgorithm(grid.flat(), startNode, endNode);
     animateAlgorithm(visitedNodes, shortestPath);
   };
 
@@ -245,14 +258,14 @@ function App() {
           <button
             type="button"
             className="action"
-            onClick={findShortestPath}
+            onClick={visualizeDijkstra}
           >
             Dijkstra's Algorithm
           </button>
           <button
             type="button"
             className="action"
-            onClick={findShortestPath}
+            onClick={visualizeAStar}
           >
             A* Algorithm
           </button>

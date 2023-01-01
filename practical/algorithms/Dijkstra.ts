@@ -10,6 +10,11 @@ interface DijkstraNodeData {
   col: number;
 }
 
+interface NodePosition {
+  row: number;
+  col: number;
+}
+
 type NodeState = {
   isVisited: boolean;
   isOnPath: boolean;
@@ -20,8 +25,8 @@ export function createGridData(
   rows: number,
   cols: number,
   nodeStates: NodeState[][],
-  startNodePos: DijkstraNodeData,
-  endNodePos: DijkstraNodeData,
+  startNodePos: NodePosition,
+  endNodePos: NodePosition,
 ) {
   let grid: Node<DijkstraNodeData>[][] = [];
   let startNode: Node<DijkstraNodeData> | null = null;
