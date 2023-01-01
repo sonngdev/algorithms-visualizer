@@ -3,7 +3,7 @@ export class Node<T = any> {
   public isVisited: boolean = false;
   public isWall: boolean = false;
   public previousNode: Node | null = null;
-  public neighbors: Node[] = [];
+  public neighbors: Node<T>[] = [];
 
   constructor(
     public data: T

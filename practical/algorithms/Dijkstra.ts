@@ -14,7 +14,6 @@ export default function performDijkstraAlgorithm<T = any>(
   const visitedNodes: Node<T>[] = [];
 
   for (let node of grid) {
-    node.distance = node === originNode ? 0 : Infinity;
     if (node === originNode) {
       node.distance = 0;
     } else if (node.isNeighbor(originNode)) {
