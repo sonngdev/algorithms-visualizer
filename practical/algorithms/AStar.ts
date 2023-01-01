@@ -98,7 +98,6 @@ export function performAlgorithm<T extends AStarNodeData>(
     node.data.gScore = node === startNode ? 0 : Infinity;
     node.data.hScore = calculateHeuristic(node, endNode);
     node.data.fScore = node.data.gScore + node.data.hScore;
-    node.isVisited = false;
     node.previousNode = null;
   }
 

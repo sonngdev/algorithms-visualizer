@@ -8,6 +8,8 @@ interface DijkstraResult<T> {
 interface DijkstraNodeData {
   row: number;
   col: number;
+  distance: number;
+  isVisited: boolean;
 }
 
 interface NodePosition {
@@ -35,7 +37,12 @@ export function createGridData(
   for (let i = 0; i < rows; i++) {
     const row: Node<DijkstraNodeData>[] = [];
     for (let j = 0; j < cols; j++) {
-      const node = new Node({ row: i, col: j });
+      const node = new Node({
+        row: i,
+        col: j,
+        distance: Infinity,
+        isVisited: false,
+      });
       if (nodeStates[i][j].isWall) {
         node.isWall = true;
       }
@@ -63,7 +70,7 @@ export function createGridData(
   return { grid, startNode, endNode };
 }
 
-export function performAlgorithm<T = any>(
+export function performAlgorithm<T extends DijkstraNodeData>(
   grid: Node<T>[],
   originNode: Node<T>,
   destinationNode: Node<T>,
@@ -73,42 +80,44 @@ export function performAlgorithm<T = any>(
 
   for (let node of grid) {
     if (node === originNode) {
-      node.distance = 0;
+      node.data.distance = 0;
     } else if (node.isNeighbor(originNode)) {
-      node.distance = 1;
+      node.data.distance = 1;
     } else {
-      node.distance = Infinity;
+      node.data.distance = Infinity;
     }
-    node.isVisited = false;
+    node.data.isVisited = false;
     node.previousNode = null;
   }
 
   const unvisitedNodes = grid.slice();
 
   while (unvisitedNodes.length > 0) {
-    unvisitedNodes.sort((node1, node2) => node1.distance - node2.distance);
+    unvisitedNodes.sort(
+      (node1, node2) => node1.data.distance - node2.data.distance,
+    );
     const closestNode = unvisitedNodes.shift();
     // If the closest node is infinitely far away,
     // it is no not connected to the current grid (graph)
     // and we should stop
-    if (!closestNode || closestNode.distance === Infinity) {
+    if (!closestNode || closestNode.data.distance === Infinity) {
       break;
     }
     if (closestNode.isWall) {
       continue;
     }
 
-    closestNode.isVisited = true;
+    closestNode.data.isVisited = true;
     visitedNodes.push(closestNode);
     if (closestNode === destinationNode) {
       break;
     }
 
     const unvisitedNeighbors = closestNode.neighbors.filter(
-      (node) => !node.isVisited,
+      (node) => !node.data.isVisited,
     );
     for (let neighbor of unvisitedNeighbors) {
-      neighbor.distance = closestNode.distance + 1;
+      neighbor.data.distance = closestNode.data.distance + 1;
       neighbor.previousNode = closestNode;
     }
   }
