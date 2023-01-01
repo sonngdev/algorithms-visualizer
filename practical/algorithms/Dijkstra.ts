@@ -61,6 +61,9 @@ export default function performDijkstraAlgorithm<T = any>(
     shortestPath.unshift(shortestPathRunner);
     if (shortestPathRunner.previousNode) {
       shortestPathRunner = shortestPathRunner.previousNode;
+    } else {
+      // Can't backtrace to originNode, there is no shortest path
+      break;
     }
   }
 
