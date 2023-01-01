@@ -245,10 +245,17 @@ function App() {
           </button>
           <button
             type="button"
-            className="action clear"
+            className="action minor"
             onClick={clearVisualizedPath}
           >
             Clear path
+          </button>
+          <button
+            type="button"
+            className="action minor"
+            onClick={resetNodeStates}
+          >
+            Reset grid
           </button>
         </div>
       </div>
