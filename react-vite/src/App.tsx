@@ -8,6 +8,7 @@ import './App.css'
 type NodeState = {
   isVisited: boolean;
   isOnPath: boolean;
+  isWall: boolean;
 }
 
 type NodeData = {
@@ -33,7 +34,7 @@ function App() {
     for (let i = 0; i < NUM_ROWS; i++) {
       const row: NodeState[] = [];
       for (let j = 0; j < NUM_COLS; j++) {
-        row.push({ isVisited: false, isOnPath: false });
+        row.push({ isVisited: false, isOnPath: false, isWall: false });
       }
       states.push(row);
     }
@@ -46,6 +47,17 @@ function App() {
     row: 0,
     col: 0,
   });
+
+  const clearVisualizedPath = () => {
+    setNodeStates(produce((draft) => {
+      for (let row of draft) {
+        for (let nodeState of row) {
+          nodeState.isVisited = false;
+          nodeState.isOnPath = false;
+        }
+      }
+    }))
+  };
 
   const resetNodeStates = () => {
     setNodeStates(initialNodeStates);
@@ -60,6 +72,9 @@ function App() {
       const row: NodeDS<NodeData>[] = [];
       for (let j = 0; j < NUM_COLS; j++) {
         const node = new NodeDS({ row: i, col: j });
+        if (nodeStates[i][j].isWall) {
+          node.isWall = true;
+        }
         if (j > 0) {
           const leftNode = row[j - 1];
           node.neighbors.push(leftNode);
@@ -105,7 +120,7 @@ function App() {
   }
 
   const findShortestPath = () => {
-    resetNodeStates();
+    clearVisualizedPath();
 
     const { grid, startNode, endNode } = createGridData();
     if (!startNode || !endNode) {
@@ -117,7 +132,7 @@ function App() {
   };
 
   const handleDragStart = (nodeType: NodeType, row: number, col: number) => {
-    resetNodeStates();
+    clearVisualizedPath();
     setDragState({ isActive: true, nodeType, row, col });
   }
 
@@ -138,6 +153,13 @@ function App() {
       setEndNodePos({ row: row, col: col });
     }
     setDragState({ isActive: false, nodeType: null, row: 0, col: 0 });
+  };
+
+  const handleNodeClick = (row: number, col: number) => {
+    clearVisualizedPath();
+    setNodeStates(produce((draft) => {
+      draft[row][col].isWall = !draft[row][col].isWall;
+    }));
   };
 
   return (
@@ -178,7 +200,7 @@ function App() {
           onDrop={handleDrop}
         >
           {nodeStates.map((row, rowIndex) => (
-            row.map((node, colIndex) => {
+            row.map((nodeState, colIndex) => {
               let type: NodeType;
               if (rowIndex === startNodePos.row && colIndex === startNodePos.col) {
                 type = NodeType.START;
@@ -187,7 +209,7 @@ function App() {
               } else {
                 type = NodeType.MIDDLE;
               }
-              const { isVisited, isOnPath } = node;
+              const { isVisited, isOnPath, isWall } = nodeState;
 
               return (
                 <Node
@@ -197,9 +219,11 @@ function App() {
                   type={type}
                   isVisited={isVisited}
                   isOnPath={isOnPath}
+                  isWall={isWall}
                   dragState={dragState}
                   onDragStart={handleDragStart}
                   onDragEnter={handleDragEnter}
+                  onClick={handleNodeClick}
                 />
               )
             })
@@ -218,7 +242,7 @@ function App() {
           <button
             type="button"
             className="action clear"
-            onClick={resetNodeStates}
+            onClick={clearVisualizedPath}
           >
             Clear path
           </button>

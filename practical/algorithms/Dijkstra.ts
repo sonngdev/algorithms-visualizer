@@ -37,6 +37,9 @@ export default function performDijkstraAlgorithm<T = any>(
     if (!closestNode || closestNode.distance === Infinity) {
       break;
     }
+    if (closestNode.isWall) {
+      continue;
+    }
 
     closestNode.isVisited = true;
     visitedNodes.push(closestNode);

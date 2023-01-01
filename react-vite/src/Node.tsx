@@ -14,9 +14,11 @@ type NodeProps = {
   type: NodeType,
   isVisited: boolean,
   isOnPath: boolean,
+  isWall: boolean,
   dragState: DragState
   onDragStart: (nodeType: NodeType, row: number, col: number) => void,
   onDragEnter: (row: number, col: number) => void,
+  onClick: (row: number, col: number) => void,
 };
 
 export default function Node({
@@ -25,9 +27,11 @@ export default function Node({
   type,
   isOnPath,
   isVisited,
+  isWall,
   dragState,
   onDragStart,
   onDragEnter,
+  onClick,
 }: NodeProps) {
   const [isUnderDrag, setIsUnderDrag] = useState(false);
 
@@ -40,6 +44,8 @@ export default function Node({
     className += ' on-path';
   } else if (isVisited) {
     className += ' visited';
+  } else if (isWall) {
+    className += ' wall';
   } else if (isUnderDrag) {
     if (dragState.nodeType === NodeType.START) {
       className += ' under-drag-start';
@@ -53,12 +59,20 @@ export default function Node({
   }
 
   const handleDragEnter = () => {
-    onDragEnter(row, col);
-    setIsUnderDrag(true);
+    if (!isWall) {
+      onDragEnter(row, col);
+      setIsUnderDrag(true);
+    }
   };
 
   const handleDragLeave = () => {
     setIsUnderDrag(false);
+  };
+
+  const handleClick = () => {
+    if (type === NodeType.MIDDLE) {
+      onClick(row, col);
+    }
   };
 
   // Sometimes onDragLeave is not called, resulting in false nodes
@@ -76,6 +90,7 @@ export default function Node({
       onDragStart={handleDragStart}
       onDragEnter={handleDragEnter}
       onDragLeave={handleDragLeave}
+      onClick={handleClick}
     />
   )
 }

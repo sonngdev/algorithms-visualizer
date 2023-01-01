@@ -1,6 +1,7 @@
 export class Node<T = any> {
   public distance: number = Infinity;
   public isVisited: boolean = false;
+  public isWall: boolean = false;
   public previousNode: Node | null = null;
   public neighbors: Node[] = [];
 

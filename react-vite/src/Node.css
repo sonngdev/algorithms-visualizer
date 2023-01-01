@@ -21,6 +21,10 @@
   background-color: #f8bb37;
 }
 
+.node.wall {
+  background-color: black;
+}
+
 .node.under-drag-start {
   background-color: #FF6F68;
 }
