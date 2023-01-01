@@ -105,12 +105,20 @@ function App() {
   const visualizeDijkstra = () => {
     clearVisualizedPath();
 
+    const wallPositions = [];
+    for (let i = 0; i < nodeStates.length; i++) {
+      for (let j = 0; j < nodeStates[i].length; j++) {
+        if (nodeStates[i][j].isWall) {
+          wallPositions.push({ row: i, col: j });
+        }
+      }
+    }
     const { grid, startNode, endNode } = Dijkstra.createGridData(
       NUM_ROWS,
       NUM_COLS,
-      nodeStates,
       startNodePos,
       endNodePos,
+      wallPositions,
     );
     if (!startNode || !endNode) {
       return;
@@ -127,12 +135,20 @@ function App() {
   const visualizeAStar = () => {
     clearVisualizedPath();
 
+    const wallPositions = [];
+    for (let i = 0; i < nodeStates.length; i++) {
+      for (let j = 0; j < nodeStates[i].length; j++) {
+        if (nodeStates[i][j].isWall) {
+          wallPositions.push({ row: i, col: j });
+        }
+      }
+    }
     const { grid, startNode, endNode } = AStar.createGridData(
       NUM_ROWS,
       NUM_COLS,
-      nodeStates,
       startNodePos,
       endNodePos,
+      wallPositions,
     );
     if (!startNode || !endNode) {
       return;

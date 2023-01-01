@@ -17,18 +17,12 @@ interface NodePosition {
   col: number;
 }
 
-type NodeState = {
-  isVisited: boolean;
-  isOnPath: boolean;
-  isWall: boolean;
-};
-
 export function createGridData(
   rows: number,
   cols: number,
-  nodeStates: NodeState[][],
-  startNodePos: NodePosition,
-  endNodePos: NodePosition,
+  startNodePosition: NodePosition,
+  endNodePosition: NodePosition,
+  wallPositions: NodePosition[],
 ) {
   let grid: Node<DijkstraNodeData>[][] = [];
   let startNode: Node<DijkstraNodeData> | null = null;
@@ -43,9 +37,6 @@ export function createGridData(
         distance: Infinity,
         isVisited: false,
       });
-      if (nodeStates[i][j].isWall) {
-        node.isWall = true;
-      }
       if (j > 0) {
         const leftNode = row[j - 1];
         node.neighbors.push(leftNode);
@@ -59,14 +50,20 @@ export function createGridData(
 
       row.push(node);
 
-      if (i === startNodePos.row && j === startNodePos.col) {
+      if (i === startNodePosition.row && j === startNodePosition.col) {
         startNode = node;
-      } else if (i === endNodePos.row && j === endNodePos.col) {
+      } else if (i === endNodePosition.row && j === endNodePosition.col) {
         endNode = node;
       }
     }
     grid.push(row);
   }
+
+  for (let wallPosition of wallPositions) {
+    const { row , col } = wallPosition;
+    grid[row][col].isWall = true;
+  }
+
   return { grid, startNode, endNode };
 }
 

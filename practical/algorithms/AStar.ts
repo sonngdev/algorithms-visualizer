@@ -18,18 +18,12 @@ interface NodePosition {
   col: number;
 }
 
-type NodeState = {
-  isVisited: boolean;
-  isOnPath: boolean;
-  isWall: boolean;
-};
-
 export function createGridData(
   rows: number,
   cols: number,
-  nodeStates: NodeState[][],
   startNodePos: NodePosition,
   endNodePos: NodePosition,
+  wallPositions: NodePosition[],
 ) {
   let grid: Node<AStarNodeData>[][] = [];
   let startNode: Node<AStarNodeData> | null = null;
@@ -45,9 +39,6 @@ export function createGridData(
         gScore: Infinity,
         hScore: Infinity,
       });
-      if (nodeStates[i][j].isWall) {
-        node.isWall = true;
-      }
       if (j > 0) {
         const leftNode = row[j - 1];
         node.neighbors.push(leftNode);
@@ -69,6 +60,12 @@ export function createGridData(
     }
     grid.push(row);
   }
+
+  for (let wallPosition of wallPositions) {
+    const { row, col } = wallPosition;
+    grid[row][col].isWall = true;
+  }
+
   return { grid, startNode, endNode };
 }
 
@@ -119,7 +116,6 @@ export function performAlgorithm<T extends AStarNodeData>(
       break;
     }
     for (let neighbor of currentNode.neighbors) {
-      // debugger;
       let tentativeGScore = currentNode.data.gScore + 1;
       // Find a new best path to a neighbor, record it
       if (tentativeGScore < neighbor.data.gScore) {
