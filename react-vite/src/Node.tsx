@@ -6,22 +6,22 @@ export enum NodeType {
   START,
   END,
   MIDDLE,
-};
+}
 
 type NodeProps = {
-  row: number,
-  col: number,
-  type: NodeType,
-  isVisited: boolean,
-  isOnPath: boolean,
-  isWall: boolean,
-  dragState: DragState
-  onDragStart: (nodeType: NodeType, row: number, col: number) => void,
-  onDragEnter: (row: number, col: number) => void,
-  onClick: (row: number, col: number) => void,
-  onMouseDown: (row: number, col: number) => void,
-  onMouseEnter: (row: number, col: number) => void,
-  onMouseUp: () => void,
+  row: number;
+  col: number;
+  type: NodeType;
+  isVisited: boolean;
+  isOnPath: boolean;
+  isWall: boolean;
+  dragState: DragState;
+  onDragStart: (nodeType: NodeType, row: number, col: number) => void;
+  onDragEnter: (row: number, col: number) => void;
+  onClick: (row: number, col: number) => void;
+  onMouseDown: (row: number, col: number) => void;
+  onMouseEnter: (row: number, col: number) => void;
+  onMouseUp: () => void;
 };
 
 export default function Node({
@@ -41,7 +41,7 @@ export default function Node({
 }: NodeProps) {
   const [isUnderDrag, setIsUnderDrag] = useState(false);
 
-  let className = "node";
+  let className = 'node';
   if (type === NodeType.START) {
     className += ' start';
   } else if (type === NodeType.END) {
@@ -64,7 +64,7 @@ export default function Node({
 
   const handleDragStart = () => {
     onDragStart(type, row, col);
-  }
+  };
 
   const handleDragEnter = () => {
     if (!isWall) {
@@ -97,13 +97,13 @@ export default function Node({
     if (type === NodeType.MIDDLE && event.shiftKey) {
       onMouseEnter(row, col);
     }
-  }
+  };
 
   const handleMouseUp = (event: MouseEvent<HTMLDivElement>) => {
     if (event.shiftKey) {
       onMouseUp();
     }
-  }
+  };
 
   // Sometimes onDragLeave is not called, resulting in false nodes
   // being highlighted.
@@ -125,5 +125,5 @@ export default function Node({
       onMouseEnter={handleMouseEnter}
       onMouseUp={handleMouseUp}
     />
-  )
+  );
 }

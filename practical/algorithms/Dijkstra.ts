@@ -19,7 +19,7 @@ type NodeState = {
   isVisited: boolean;
   isOnPath: boolean;
   isWall: boolean;
-}
+};
 
 export function createGridData(
   rows: number,
@@ -130,6 +130,6 @@ export function performAlgorithm<T = any>(
 const Dijkstra = {
   createGridData,
   performAlgorithm,
-}
+};
 
 export default Dijkstra;

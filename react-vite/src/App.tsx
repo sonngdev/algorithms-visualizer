@@ -4,25 +4,25 @@ import Node, { NodeType } from './Node';
 import { Node as NodeDS } from '../../practical/data-structures/Node';
 import Dijkstra from '../../practical/algorithms/Dijkstra';
 import AStar from '../../practical/algorithms/AStar';
-import './App.css'
+import './App.css';
 
 type NodeState = {
   isVisited: boolean;
   isOnPath: boolean;
   isWall: boolean;
-}
+};
 
 type NodeData = {
   row: number;
   col: number;
-}
+};
 
 export type DragState = {
   isActive: boolean;
   nodeType: NodeType | null;
   row: number;
   col: number;
-}
+};
 
 const NUM_ROWS = 20;
 const NUM_COLS = 35;
@@ -53,14 +53,16 @@ function App() {
   //-------------Helpers-------------//
 
   const clearVisualizedPath = () => {
-    setNodeStates(produce((draft) => {
-      for (let row of draft) {
-        for (let nodeState of row) {
-          nodeState.isVisited = false;
-          nodeState.isOnPath = false;
+    setNodeStates(
+      produce((draft) => {
+        for (let row of draft) {
+          for (let nodeState of row) {
+            nodeState.isVisited = false;
+            nodeState.isOnPath = false;
+          }
         }
-      }
-    }))
+      }),
+    );
   };
 
   const resetNodeStates = () => {
@@ -69,47 +71,78 @@ function App() {
 
   //-------------Visualizing pathfinding algorithm-------------//
 
-  const animateAlgorithm = (visitedNodes: NodeDS<NodeData>[], shortestPath: NodeDS<NodeData>[]) => {
+  const animateAlgorithm = (
+    visitedNodes: NodeDS<NodeData>[],
+    shortestPath: NodeDS<NodeData>[],
+  ) => {
     for (let i = 0; i < visitedNodes.length; i++) {
       setTimeout(() => {
-        const { data: { row, col } } = visitedNodes[i];
-        setNodeStates(produce((draft) => {
-          draft[row][col].isVisited = true;
-        }));
+        const {
+          data: { row, col },
+        } = visitedNodes[i];
+        setNodeStates(
+          produce((draft) => {
+            draft[row][col].isVisited = true;
+          }),
+        );
       }, i * 5);
     }
 
     for (let i = 0; i < shortestPath.length; i++) {
       setTimeout(() => {
-        const { data: { row, col } } = shortestPath[i];
-        setNodeStates(produce((draft) => {
-          draft[row][col].isOnPath = true;
-        }));
+        const {
+          data: { row, col },
+        } = shortestPath[i];
+        setNodeStates(
+          produce((draft) => {
+            draft[row][col].isOnPath = true;
+          }),
+        );
       }, (visitedNodes.length + i * 4) * 5); // Slow down shortest path animation by 4 times
     }
-  }
+  };
 
   const visualizeDijkstra = () => {
     clearVisualizedPath();
 
-    const { grid, startNode, endNode } = Dijkstra.createGridData(NUM_ROWS, NUM_COLS, nodeStates, startNodePos, endNodePos);
+    const { grid, startNode, endNode } = Dijkstra.createGridData(
+      NUM_ROWS,
+      NUM_COLS,
+      nodeStates,
+      startNodePos,
+      endNodePos,
+    );
     if (!startNode || !endNode) {
       return;
     }
 
-    const { visitedNodes, shortestPath } = Dijkstra.performAlgorithm(grid.flat(), startNode, endNode);
+    const { visitedNodes, shortestPath } = Dijkstra.performAlgorithm(
+      grid.flat(),
+      startNode,
+      endNode,
+    );
     animateAlgorithm(visitedNodes, shortestPath);
   };
 
   const visualizeAStar = () => {
     clearVisualizedPath();
 
-    const { grid, startNode, endNode } = AStar.createGridData(NUM_ROWS, NUM_COLS, nodeStates, startNodePos, endNodePos);
+    const { grid, startNode, endNode } = AStar.createGridData(
+      NUM_ROWS,
+      NUM_COLS,
+      nodeStates,
+      startNodePos,
+      endNodePos,
+    );
     if (!startNode || !endNode) {
       return;
     }
 
-    const { visitedNodes, shortestPath } = AStar.performAlgorithm(grid.flat(), startNode, endNode);
+    const { visitedNodes, shortestPath } = AStar.performAlgorithm(
+      grid.flat(),
+      startNode,
+      endNode,
+    );
     animateAlgorithm(visitedNodes, shortestPath);
   };
 
@@ -118,7 +151,7 @@ function App() {
   const handleDragStart = (nodeType: NodeType, row: number, col: number) => {
     clearVisualizedPath();
     setDragState({ isActive: true, nodeType, row, col });
-  }
+  };
 
   const handleDragEnter = (row: number, col: number) => {
     setDragState({ ...dragState, row, col });
@@ -143,30 +176,36 @@ function App() {
 
   const handleNodeClick = (row: number, col: number) => {
     clearVisualizedPath();
-    setNodeStates(produce((draft) => {
-      draft[row][col].isWall = !draft[row][col].isWall;
-    }));
+    setNodeStates(
+      produce((draft) => {
+        draft[row][col].isWall = !draft[row][col].isWall;
+      }),
+    );
   };
 
   const handleNodeMouseDown = (row: number, col: number) => {
     clearVisualizedPath();
     setIsCreatingWall(true);
-    setNodeStates(produce((draft) => {
-      draft[row][col].isWall = true;
-    }));
+    setNodeStates(
+      produce((draft) => {
+        draft[row][col].isWall = true;
+      }),
+    );
   };
 
   const handleNodeMouseEnter = (row: number, col: number) => {
     if (isCreatingWall) {
-      setNodeStates(produce((draft) => {
-        draft[row][col].isWall = true;
-      }));
+      setNodeStates(
+        produce((draft) => {
+          draft[row][col].isWall = true;
+        }),
+      );
     }
   };
 
   const handleNodeMouseUp = () => {
     setIsCreatingWall(false);
-  }
+  };
 
   return (
     <div className="App">
@@ -209,12 +248,18 @@ function App() {
           onDragOver={handleDragOver}
           onDrop={handleDrop}
         >
-          {nodeStates.map((row, rowIndex) => (
+          {nodeStates.map((row, rowIndex) =>
             row.map((nodeState, colIndex) => {
               let type: NodeType;
-              if (rowIndex === startNodePos.row && colIndex === startNodePos.col) {
+              if (
+                rowIndex === startNodePos.row &&
+                colIndex === startNodePos.col
+              ) {
                 type = NodeType.START;
-              } else if (rowIndex === endNodePos.row && colIndex === endNodePos.col) {
+              } else if (
+                rowIndex === endNodePos.row &&
+                colIndex === endNodePos.col
+              ) {
                 type = NodeType.END;
               } else {
                 type = NodeType.MIDDLE;
@@ -238,9 +283,9 @@ function App() {
                   onMouseEnter={handleNodeMouseEnter}
                   onMouseUp={handleNodeMouseUp}
                 />
-              )
-            })
-          ))}
+              );
+            }),
+          )}
         </div>
 
         <div className="tips">
@@ -249,24 +294,18 @@ function App() {
             <li>Use desktop with a mouse for the best experience</li>
             <li>Try dragging the start/end node to a new position</li>
             <li>Click on a node to toggle a wall</li>
-            <li>Hold Shift and left mouse at the same time to create walls quickly</li>
+            <li>
+              Hold Shift and left mouse at the same time to create walls quickly
+            </li>
           </ul>
         </div>
 
         <div className="sidebar">
           <h2 className="subtitle">Visualize:</h2>
-          <button
-            type="button"
-            className="action"
-            onClick={visualizeDijkstra}
-          >
+          <button type="button" className="action" onClick={visualizeDijkstra}>
             Dijkstra's Algorithm
           </button>
-          <button
-            type="button"
-            className="action"
-            onClick={visualizeAStar}
-          >
+          <button type="button" className="action" onClick={visualizeAStar}>
             A* Algorithm
           </button>
           <button
@@ -286,7 +325,7 @@ function App() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
