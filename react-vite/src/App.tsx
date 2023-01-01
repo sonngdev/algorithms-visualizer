@@ -357,18 +357,25 @@ function App() {
             <h2 className="subtitle">💡 Tips:</h2>
             <ul>
               <li>
-                <div>Use desktop with a mouse for the best experience</div>
-              </li>
-              <li>
-                <div>Try dragging the start/end node to a new position</div>
-              </li>
-              <li>
-                <div>Click on a node to toggle a wall</div>
+                <div>
+                  <em>See this site on desktop with a mouse</em> for the best
+                  experience.
+                </div>
               </li>
               <li>
                 <div>
-                  Hold Shift and left mouse at the same time to create walls
-                  quickly
+                  <em>Try dragging the start/end node</em> to a new position.
+                </div>
+              </li>
+              <li>
+                <div>
+                  <em>Click on a node</em> to toggle a wall.
+                </div>
+              </li>
+              <li>
+                <div>
+                  <em>Hold Shift and left mouse</em> at the same time to create
+                  walls quickly.
                 </div>
               </li>
             </ul>

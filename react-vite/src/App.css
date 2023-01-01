@@ -111,3 +111,8 @@
 .tips ul li div {
   margin-left: 0.3rem;
 }
+
+.tips ul li div em {
+  background-color: #ffe88e;
+  font-style: normal;
+}
