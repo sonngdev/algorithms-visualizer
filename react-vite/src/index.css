@@ -1,13 +1,45 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter&family=Righteous&display=swap');
 
-body {
-  margin: 0;
-  font-family: 'Inter', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+:root {
+  --color-accent-1: #027dfc;
+  --color-accent-2: #00e379;
+  --color-foreground: #000000;
+  --color-background: #edf2f7;
+
+  --font-size-xl: 20px;
+  --font-size-lg: 18px;
+  --font-size-md: 14px;
+  --font-size-sm: 11px;
+
+  --font-family-title: 'Righteous', serif;
+  --font-family-body: 'Inter', sans-serif;
+
+  --spacing-lg: 1.5rem;
+  --spacing-md: 1rem;
+  --spacing-sm: 0.75rem;
+
+  --border-radius-lg: 16px;
+  --border-radius-md: 10px;
+  --border-radius-sm: 6px;
+
+  --box-shadow: 0px 25px 50px -12px rgba(0, 0, 0, 0.1);
+
+  --gradient-accent: linear-gradient(
+    to top right,
+    var(--color-accent-1),
+    var(--color-accent-2)
+  );
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-md);
+  background-color: var(--color-background);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }

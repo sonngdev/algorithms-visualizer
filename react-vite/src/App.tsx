@@ -1,5 +1,8 @@
 import { DragEventHandler, useMemo, useRef, useState } from 'react';
 import produce from 'immer';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
+
 import Node, { NodeType } from './Node';
 import { Node as NodeDS } from '../../practical/data-structures/Node';
 import Dijkstra from '../../practical/algorithms/Dijkstra';
@@ -238,37 +241,49 @@ function App() {
 
   return (
     <div className="App">
-      <h1 className="title">Pathfinding Algorithms Visualizer</h1>
+      <div className="title">
+        <h1>Pathfinding Algorithms Visualizer</h1>
+        <div>
+          Check out on <a href="https://github.com/thanhsonng/algorithm-visualizer" target="_blank">GitHub</a>
+          &nbsp;
+          <FontAwesomeIcon icon={faGithub} size="lg" />
+        </div>
+      </div>
 
-      <div className="main">
+      <div className="main-grid">
+        <h2>Grid</h2>
         <div className="legends">
-          <div className="legend-group">
+          <div className="legend-group start">
             <div className="node start"></div>
-            <span className="label">Start node</span>
+            <span className="label">Start</span>
           </div>
-          <div className="legend-group">
+          <div className="legend-group end">
             <div className="node end"></div>
-            <span className="label">End node</span>
+            <span className="label">End</span>
           </div>
           <div className="legend-group">
             <div className="node"></div>
-            <span className="label">Unvisited node</span>
+            <span className="label">Unvisited</span>
           </div>
-          <div className="legend-group">
+          <div className="legend-group visited">
             <div className="node visited"></div>
-            <span className="label">Visited node</span>
+            <span className="label">Visited</span>
           </div>
-          <div className="legend-group">
+          <div className="legend-group on-path">
             <div className="node on-path"></div>
-            <span className="label">Shortest-path node</span>
+            <span className="label">Shortest</span>
           </div>
-          <div className="legend-group">
+          <div className="legend-group wall">
             <div className="node wall"></div>
-            <span className="label">Wall node</span>
+            <span className="label">Wall</span>
           </div>
         </div>
+      </div>
 
-        <div
+      <div className="main">
+
+
+        {/* <div
           className="grid"
           style={{
             gridTemplateRows: `repeat(${NUM_ROWS}, 1fr)`,
@@ -380,7 +395,7 @@ function App() {
               </li>
             </ul>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

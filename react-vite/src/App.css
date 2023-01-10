@@ -2,12 +2,104 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0 4rem;
+  padding: var(--spacing-md);
+  width: 100%;
+  row-gap: var(--spacing-md);
 }
 
 .title {
+  background: var(--gradient-accent);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-lg) var(--spacing-md);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  box-shadow: var(--box-shadow);
+}
+
+.title h1 {
   font-weight: normal;
-  font-family: 'Righteous';
+  font-family: var(--font-family-title);
+  font-size: var(--font-size-xl);
+  margin: 0;
+  margin-bottom: var(--spacing-sm);
+}
+
+.title a, .title a:visited {
+  color: white;
+}
+
+.main-grid {
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-lg) var(--spacing-md);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  box-shadow: var(--box-shadow);
+}
+
+.main-grid h2 {
+  text-align: left;
+  width: 100%;
+  margin: 0;
+  margin-bottom: var(--spacing-md);
+  font-size: var(--font-size-lg);
+  font-weight: bold;
+  background-image: var(--gradient-accent);
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.main-grid .legends {
+  display: grid;
+  grid-template-areas:
+    "start unvisited shortest"
+    "end visited wall";
+  width: 100%;
+  row-gap: var(--spacing-sm);
+}
+
+.main-grid .legends .legend-group {
+  display: flex;
+  column-gap: 0.5rem;
+  align-items: center;
+}
+
+.main-grid .legends .legend-group.start {
+  grid-area: start;
+}
+
+.main-grid .legends .legend-group.end {
+  grid-area: end;
+}
+
+.main-grid .legends .legend-group {
+  grid-area: unvisited;
+}
+
+.main-grid .legends .legend-group.visited {
+  grid-area: visited;
+}
+
+.main-grid .legends .legend-group.on-path {
+  grid-area: shortest;
+}
+
+.main-grid .legends .legend-group.wall {
+  grid-area: wall;
+}
+
+.main-grid .legends .legend-group .node {
+  --node-width: 18px;
+}
+
+.main-grid .legends .legend-group .label {
+  font-size: 0.75rem;
 }
 
 .main {
@@ -21,25 +113,6 @@
   grid-template-columns: 3fr 1fr;
 }
 
-.legends {
-  grid-area: legends;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  column-gap: 1.5rem;
-  row-gap: 0.5rem;
-  margin-bottom: 1rem;
-}
-
-.legend-group {
-  display: flex;
-  column-gap: 0.5rem;
-  align-items: center;
-}
-
-.legend-group .label {
-  font-size: 0.75rem;
-}
 
 .grid {
   --grid-gap: 0.2vw;

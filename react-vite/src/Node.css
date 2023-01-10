@@ -1,16 +1,16 @@
 .node {
-  --node-width: 1.5vw;
+  --node-width: 20px;
   border: solid 1px black;
   width: var(--node-width);
   height: var(--node-width);
 }
 
 .node.start {
-  background-color: #fe3e34;
+  background-color: #027DFC;
 }
 
 .node.end {
-  background-color: #34d484;
+  background-color: #00E379;
 }
 
 .node.visited {
