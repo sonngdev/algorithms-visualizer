@@ -27,10 +27,10 @@ export type DragState = {
   col: number;
 };
 
-const NUM_ROWS = 11;
+const NUM_ROWS = 9;
 const NUM_COLS = 10;
-const DEFAULT_START_NODE_POS = { row: 5, col: 2 };
-const DEFAULT_END_NODE_POS = { row: 5, col: 7 };
+const DEFAULT_START_NODE_POS = { row: 4, col: 2 };
+const DEFAULT_END_NODE_POS = { row: 4, col: 7 };
 
 function App() {
   const [startNodePos, setStartNodePos] = useState(DEFAULT_START_NODE_POS);
@@ -326,6 +326,43 @@ function App() {
               );
             }),
           )}
+        </div>
+      </div>
+
+      <div className="actions">
+        <h2>Visualize</h2>
+
+        <div className="algorithms">
+          <button
+            type="button"
+            className="action"
+            onClick={visualizeDijkstra}
+          >
+            Dijkstra's Algorithm
+          </button>
+          <button type="button" className="action" onClick={visualizeAStar}>
+            A* Algorithm
+          </button>
+        </div>
+
+        <div className="cleanup-buttons">
+          <button
+            type="button"
+            className="action minor"
+            onClick={clearVisualizedPath}
+          >
+            Clear path
+          </button>
+          <button
+            type="button"
+            className="action minor"
+            onClick={resetNodeStates}
+          >
+            Clear walls
+          </button>
+          <button type="button" className="action minor" onClick={resetGrid}>
+            Reset grid
+          </button>
         </div>
       </div>
 

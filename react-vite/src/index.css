@@ -5,6 +5,7 @@
   --color-accent-2: #00e379;
   --color-foreground: #000000;
   --color-background: #edf2f7;
+  --color-background-dark: #e0e5ea;
 
   --font-size-xl: 20px;
   --font-size-lg: 18px;
@@ -19,7 +20,7 @@
   --spacing-sm: 0.75rem;
 
   --border-radius-lg: 16px;
-  --border-radius-md: 10px;
+  --border-radius-md: 8px;
   --border-radius-sm: 6px;
 
   --box-shadow: 0px 25px 50px -12px rgba(0, 0, 0, 0.1);

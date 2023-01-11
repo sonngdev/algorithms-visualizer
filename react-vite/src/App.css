@@ -31,7 +31,7 @@
   color: white;
 }
 
-.main-grid {
+.main-grid, .actions {
   border-radius: var(--border-radius-lg);
   padding: var(--spacing-lg) var(--spacing-md);
   width: 100%;
@@ -42,7 +42,7 @@
   box-shadow: var(--box-shadow);
 }
 
-.main-grid h2 {
+.main-grid h2, .actions h2 {
   align-self: flex-start;
   margin: 0;
   font-size: var(--font-size-lg);
@@ -112,6 +112,44 @@
   margin-top: var(--spacing-md);
 }
 
+.actions .algorithms {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: var(--spacing-sm);
+  width: 100%;
+  margin-top: var(--spacing-md);
+}
+
+.actions .cleanup-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: var(--spacing-sm);
+  width: 100%;
+  margin-top: var(--spacing-md);
+}
+
+.actions button {
+  background-color: var(--color-background);
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  transition: background-color ease-in-out 0.1s;
+}
+
+.actions button:is(:hover, :focus-visible) {
+  background-color: var(--color-background-dark);
+}
+
+.actions .algorithms button {
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius-md);
+}
+
+.actions .cleanup-buttons button {
+  padding: var(--spacing-sm);
+  border-radius: var(--border-radius-sm);
+}
+
 .main {
   display: grid;
   column-gap: 2rem;
@@ -121,53 +159,6 @@
     'tips sidebar';
   grid-template-rows: fit-content;
   grid-template-columns: 3fr 1fr;
-}
-
-
-.sidebar {
-  grid-area: sidebar;
-}
-
-.sidebar .subtitle {
-  font-size: 1rem;
-  margin-top: 0;
-  margin-bottom: 1.5rem;
-}
-
-.algorithms {
-  display: flex;
-  flex-direction: column;
-  row-gap: 0.5rem;
-  margin-bottom: 1rem;
-}
-
-.cleanup-buttons {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  column-gap: 0.5rem;
-  margin-bottom: 2rem;
-}
-
-.action {
-  border: solid 1px black;
-  background-color: transparent;
-  padding: 1rem;
-  cursor: pointer;
-  transition: all ease-in-out 0.1s;
-  box-shadow: 0 0 0 0;
-  transform: translate(0, 0);
-}
-
-.action:hover {
-  box-shadow: 3px 3px 0 0;
-  transform: translate(-3px, -3px);
-}
-
-.action.minor {
-  padding: 0.4rem;
-  font-size: 0.75rem;
-  width: 100%;
 }
 
 .tips .subtitle {
