@@ -2,6 +2,7 @@ import { DragEventHandler, useMemo, useRef, useState } from 'react';
 import produce from 'immer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 import Node, { NodeType } from './Node';
 import { Node as NodeDS } from '../../practical/data-structures/Node';
@@ -241,14 +242,13 @@ function App() {
 
   return (
     <div className="App">
-      <div className="title">
+      <header className="title">
         <h1>Pathfinding Algorithms Visualizer</h1>
         <div>
-          Check out on <a href="https://github.com/thanhsonng/algorithm-visualizer" target="_blank">GitHub</a>
-          &nbsp;
-          <FontAwesomeIcon icon={faGithub} size="lg" />
+          Check out on <a href="https://github.com/thanhsonng/algorithm-visualizer" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <FontAwesomeIcon icon={faGithub} size="lg" className="icon" />
         </div>
-      </div>
+      </header>
 
       <div className="main-grid">
         <h2>Grid</h2>
@@ -330,7 +330,7 @@ function App() {
       </div>
 
       <div className="actions">
-        <h2>Visualize</h2>
+        <h2>Controls</h2>
 
         <div className="algorithms">
           <button
@@ -391,6 +391,15 @@ function App() {
           </li>
         </ul>
       </div>
+
+      <footer>
+        <div>Created with <FontAwesomeIcon icon={faHeart} className="icon" /> by Son Nguyen</div>
+        <div className="contacts">
+          <a href="https://github.com/thanhsonng" target="_blank" rel="noopener noreferrer">
+            <FontAwesomeIcon icon={faGithub} size="xl" />
+          </a>
+        </div>
+      </footer>
     </div>
   );
 }

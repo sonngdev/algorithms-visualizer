@@ -27,6 +27,10 @@
   margin-bottom: var(--spacing-sm);
 }
 
+.title .icon {
+  margin-left: 0.5rem;
+}
+
 .title a, .title a:visited {
   color: white;
 }
@@ -162,4 +166,25 @@
 
 .tips ul li::marker {
   color: var(--color-accent-1);
+}
+
+footer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: var(--spacing-xl);
+}
+
+footer .icon {
+  margin-left: 0.2em;
+  margin-right: 0.2em;
+}
+
+footer .contacts {
+  margin: var(--spacing-md) 0;
+}
+
+footer a:is(:visited) {
+  color: var(--color-foreground);
 }
