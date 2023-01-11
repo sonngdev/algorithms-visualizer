@@ -159,6 +159,7 @@
 .actions .cleanup-buttons button {
   padding: var(--spacing-sm);
   border-radius: var(--border-radius-sm);
+  font-size: var(--font-size-sm);
 }
 
 .tips ul {
@@ -200,6 +201,13 @@ footer a:is(:visited) {
 @media screen and (min-width: 962px) {
   .App {
     padding: 2rem 4rem 1rem;
+    display: grid;
+    grid-template-areas:
+      "title title"
+      "grid controls"
+      "grid tips"
+      "footer footer";
+    grid-template-columns: auto 400px;
   }
 
   .title {
@@ -209,6 +217,7 @@ footer a:is(:visited) {
     width: 100%;
     position: relative;
     box-shadow: none;
+    grid-area: title;
   }
 
   .title h1 {
@@ -233,5 +242,21 @@ footer a:is(:visited) {
 
   .title .desktop a, .title .desktop a:visited {
     color: var(--color-foreground);
+  }
+
+  .main-grid {
+    grid-area: grid;
+  }
+
+  .actions {
+    grid-area: controls;
+  }
+
+  .tips {
+    grid-area: tips;
+  }
+
+  footer {
+    grid-area: footer;
   }
 }
