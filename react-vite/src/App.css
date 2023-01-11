@@ -140,6 +140,7 @@
 }
 
 .actions button {
+  color: var(--color-foreground);
   background-color: var(--color-background);
   font-weight: bold;
   cursor: pointer;
@@ -195,7 +196,7 @@ footer .contacts {
   margin: var(--spacing-md) 0;
 }
 
-footer a:is(:visited) {
+footer a, footer a:visited {
   color: var(--color-foreground);
 }
 
