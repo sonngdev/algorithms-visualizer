@@ -113,7 +113,7 @@
 }
 
 .main-grid .grid {
-  --grid-gap: calc((100vw - 4 * var(--spacing-md) - 10 * var(--node-width)) / 9);
+  --grid-gap: calc((100vw - 4 * var(--spacing-md) - 11 * var(--node-width)) / 10);
   grid-area: grid;
   justify-self: center;
   display: grid;
@@ -183,6 +183,7 @@ footer {
   flex-direction: column;
   align-items: center;
   margin-top: var(--spacing-xl);
+  font-size: var(--font-size-sm);
 }
 
 footer .icon {
@@ -207,7 +208,9 @@ footer a:is(:visited) {
       "grid controls"
       "grid tips"
       "footer footer";
-    grid-template-columns: auto 400px;
+    grid-template-columns: auto 350px;
+    grid-template-rows: auto auto 1fr auto;
+    column-gap: var(--spacing-lg);
   }
 
   .title {
@@ -218,6 +221,7 @@ footer a:is(:visited) {
     position: relative;
     box-shadow: none;
     grid-area: title;
+    margin-bottom: var(--spacing-md);
   }
 
   .title h1 {
@@ -248,12 +252,25 @@ footer a:is(:visited) {
     grid-area: grid;
   }
 
+  .main-grid .legends {
+    grid-template-areas: "start end unvisited visited shortest wall";
+    width: fit-content;
+    column-gap: var(--spacing-md);
+  }
+
+  .main-grid .grid {
+    --grid-gap: 2px;
+    --node-width: 24px;
+  }
+
   .actions {
     grid-area: controls;
+    align-self: start;
   }
 
   .tips {
     grid-area: tips;
+    align-self: start;
   }
 
   footer {

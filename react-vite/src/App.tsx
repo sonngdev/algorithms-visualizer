@@ -5,6 +5,7 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 import Node, { NodeType } from './Node';
+import { calculateDefaultNodePositions, calculateGridDimension } from './utils/dimension';
 import { Node as NodeDS } from '../../practical/data-structures/Node';
 import Dijkstra from '../../practical/algorithms/Dijkstra';
 import AStar from '../../practical/algorithms/AStar';
@@ -28,10 +29,12 @@ export type DragState = {
   col: number;
 };
 
-const NUM_ROWS = 9;
-const NUM_COLS = 10;
-const DEFAULT_START_NODE_POS = { row: 4, col: 2 };
-const DEFAULT_END_NODE_POS = { row: 4, col: 7 };
+const gridDimension = calculateGridDimension();
+const NUM_ROWS = gridDimension.rows;
+const NUM_COLS = gridDimension.cols;
+const defaultPositions = calculateDefaultNodePositions(gridDimension);
+const DEFAULT_START_NODE_POS = defaultPositions.start;
+const DEFAULT_END_NODE_POS = defaultPositions.end;
 
 function App() {
   const [startNodePos, setStartNodePos] = useState(DEFAULT_START_NODE_POS);
