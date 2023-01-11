@@ -25,11 +25,11 @@
 }
 
 .node.under-drag-start {
-  background-color: #FF6F68;
+  background-color: #67b3ff;
 }
 
 .node.under-drag-end {
-  background-color: #88D8B0;
+  background-color: #6ff5b6;
 }
 
 .node[draggable="true"] {
