@@ -24,14 +24,21 @@
   font-family: var(--font-family-title);
   font-size: var(--font-size-xl);
   margin: 0;
-  margin-bottom: var(--spacing-sm);
 }
 
-.title .icon {
+.title .desktop {
+  display: none;
+}
+
+.title .mobile {
+  margin-top: var(--spacing-sm);
+}
+
+.title .mobile .icon {
   margin-left: 0.5rem;
 }
 
-.title a, .title a:visited {
+.title .mobile a, .title .mobile a:visited {
   color: white;
 }
 
@@ -158,6 +165,7 @@
   margin: 0;
   margin-top: var(--spacing-md);
   padding-left: 1rem;
+  align-self: flex-start;
 }
 
 .tips ul li:not(:last-child) {
@@ -187,4 +195,43 @@ footer .contacts {
 
 footer a:is(:visited) {
   color: var(--color-foreground);
+}
+
+@media screen and (min-width: 962px) {
+  .App {
+    padding: 2rem 4rem 1rem;
+  }
+
+  .title {
+    background: transparent;
+    border-radius: 0;
+    padding: 0;
+    width: 100%;
+    position: relative;
+    box-shadow: none;
+  }
+
+  .title h1 {
+    background-image: var(--gradient-accent);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    font-size: var(--font-size-xxl)
+  }
+
+  .title .mobile {
+    display: none;
+  }
+
+  .title .desktop {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+  }
+
+  .title .desktop a, .title .desktop a:visited {
+    color: var(--color-foreground);
+  }
 }

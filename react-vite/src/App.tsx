@@ -244,9 +244,14 @@ function App() {
     <div className="App">
       <header className="title">
         <h1>Pathfinding Algorithms Visualizer</h1>
-        <div>
+        <div className="mobile">
           Check out on <a href="https://github.com/thanhsonng/algorithm-visualizer" target="_blank" rel="noopener noreferrer">GitHub</a>
           <FontAwesomeIcon icon={faGithub} size="lg" className="icon" />
+        </div>
+        <div className="desktop">
+          <a href="https://github.com/thanhsonng/algorithm-visualizer" target="_blank" rel="noopener noreferrer">
+            <FontAwesomeIcon icon={faGithub} size="xl" className="icon" />
+          </a>
         </div>
       </header>
 
