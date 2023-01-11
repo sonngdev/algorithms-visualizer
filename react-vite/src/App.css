@@ -31,7 +31,7 @@
   color: white;
 }
 
-.main-grid, .actions {
+.main-grid, .actions, .tips {
   border-radius: var(--border-radius-lg);
   padding: var(--spacing-lg) var(--spacing-md);
   width: 100%;
@@ -42,7 +42,7 @@
   box-shadow: var(--box-shadow);
 }
 
-.main-grid h2, .actions h2 {
+.main-grid h2, .actions h2, .tips h2 {
   align-self: flex-start;
   margin: 0;
   font-size: var(--font-size-lg);
@@ -150,33 +150,16 @@
   border-radius: var(--border-radius-sm);
 }
 
-.main {
-  display: grid;
-  column-gap: 2rem;
-  grid-template-areas:
-    'legends sidebar'
-    'grid sidebar'
-    'tips sidebar';
-  grid-template-rows: fit-content;
-  grid-template-columns: 3fr 1fr;
-}
-
-.tips .subtitle {
-  font-size: 1rem;
-  margin-bottom: 0.5rem;
-}
-
 .tips ul {
   margin: 0;
-  font-size: 0.75rem;
+  margin-top: var(--spacing-md);
   padding-left: 1rem;
 }
 
-.tips ul li div {
-  margin-left: 0.3rem;
+.tips ul li:not(:last-child) {
+  margin-bottom: var(--spacing-sm);
 }
 
-.tips ul li div em {
-  background-color: #ffe88e;
-  font-style: normal;
+.tips ul li::marker {
+  color: var(--color-accent-1);
 }

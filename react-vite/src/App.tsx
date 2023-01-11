@@ -366,73 +366,30 @@ function App() {
         </div>
       </div>
 
-      <div className="main">
-
-
-        {/* <div className="sidebar">
-          <h2 className="subtitle">Visualize:</h2>
-
-          <div className="algorithms">
-            <button
-              type="button"
-              className="action"
-              onClick={visualizeDijkstra}
-            >
-              Dijkstra's Algorithm
-            </button>
-            <button type="button" className="action" onClick={visualizeAStar}>
-              A* Algorithm
-            </button>
-          </div>
-
-          <div className="cleanup-buttons">
-            <button
-              type="button"
-              className="action minor"
-              onClick={clearVisualizedPath}
-            >
-              Clear path
-            </button>
-            <button
-              type="button"
-              className="action minor"
-              onClick={resetNodeStates}
-            >
-              Clear walls
-            </button>
-            <button type="button" className="action minor" onClick={resetGrid}>
-              Reset grid
-            </button>
-          </div>
-
-          <div className="tips">
-            <h2 className="subtitle">💡 Tips:</h2>
-            <ul>
-              <li>
-                <div>
-                  <em>See this site on desktop with a mouse</em> for the best
-                  experience.
-                </div>
-              </li>
-              <li>
-                <div>
-                  <em>Try dragging the start/end node</em> to a new position.
-                </div>
-              </li>
-              <li>
-                <div>
-                  <em>Click on a node</em> to toggle a wall.
-                </div>
-              </li>
-              <li>
-                <div>
-                  <em>Hold Shift and left mouse</em> at the same time to create
-                  walls quickly.
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div> */}
+      <div className="tips">
+        <h2>Tips</h2>
+        <ul>
+          <li>
+            <div>
+              See this site on desktop with a mouse for the best experience.
+            </div>
+          </li>
+          <li>
+            <div>
+              Try dragging the start/end node to a new position.
+            </div>
+          </li>
+          <li>
+            <div>
+              Click on a node to toggle a wall.
+            </div>
+          </li>
+          <li>
+            <div>
+              Hold Shift and left mouse at the same time to create walls quickly.
+            </div>
+          </li>
+        </ul>
       </div>
     </div>
   );
