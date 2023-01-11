@@ -43,8 +43,7 @@
 }
 
 .main-grid h2 {
-  text-align: left;
-  width: 100%;
+  align-self: flex-start;
   margin: 0;
   font-size: var(--font-size-lg);
   font-weight: bold;
