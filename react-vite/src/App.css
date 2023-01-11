@@ -46,7 +46,6 @@
   text-align: left;
   width: 100%;
   margin: 0;
-  margin-bottom: var(--spacing-md);
   font-size: var(--font-size-lg);
   font-weight: bold;
   background-image: var(--gradient-accent);
@@ -62,6 +61,7 @@
     "end visited wall";
   width: 100%;
   row-gap: var(--spacing-sm);
+  margin-top: var(--spacing-md);
 }
 
 .main-grid .legends .legend-group {
@@ -102,6 +102,17 @@
   font-size: 0.75rem;
 }
 
+.main-grid .grid {
+  --grid-gap: calc((100vw - 4 * var(--spacing-md) - 10 * var(--node-width)) / 9);
+  grid-area: grid;
+  justify-self: center;
+  display: grid;
+  row-gap: var(--grid-gap);
+  column-gap: var(--grid-gap);
+  width: fit-content;
+  margin-top: var(--spacing-md);
+}
+
 .main {
   display: grid;
   column-gap: 2rem;
@@ -113,16 +124,6 @@
   grid-template-columns: 3fr 1fr;
 }
 
-
-.grid {
-  --grid-gap: 0.2vw;
-  grid-area: grid;
-  justify-self: center;
-  display: grid;
-  row-gap: var(--grid-gap);
-  column-gap: var(--grid-gap);
-  width: fit-content;
-}
 
 .sidebar {
   grid-area: sidebar;

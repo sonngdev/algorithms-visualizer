@@ -27,10 +27,10 @@ export type DragState = {
   col: number;
 };
 
-const NUM_ROWS = 20;
-const NUM_COLS = 35;
-const DEFAULT_START_NODE_POS = { row: 9, col: 12 };
-const DEFAULT_END_NODE_POS = { row: 9, col: 22 };
+const NUM_ROWS = 11;
+const NUM_COLS = 10;
+const DEFAULT_START_NODE_POS = { row: 5, col: 2 };
+const DEFAULT_END_NODE_POS = { row: 5, col: 7 };
 
 function App() {
   const [startNodePos, setStartNodePos] = useState(DEFAULT_START_NODE_POS);
@@ -278,12 +278,8 @@ function App() {
             <span className="label">Wall</span>
           </div>
         </div>
-      </div>
 
-      <div className="main">
-
-
-        {/* <div
+        <div
           className="grid"
           style={{
             gridTemplateRows: `repeat(${NUM_ROWS}, 1fr)`,
@@ -331,8 +327,12 @@ function App() {
             }),
           )}
         </div>
+      </div>
 
-        <div className="sidebar">
+      <div className="main">
+
+
+        {/* <div className="sidebar">
           <h2 className="subtitle">Visualize:</h2>
 
           <div className="algorithms">

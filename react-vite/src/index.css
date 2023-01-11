@@ -29,6 +29,8 @@
     var(--color-accent-1),
     var(--color-accent-2)
   );
+
+  --node-width: 28px;
 }
 
 * {
