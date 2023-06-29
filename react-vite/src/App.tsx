@@ -9,6 +9,7 @@ import { calculateDefaultNodePositions, calculateGridDimension } from './utils/d
 import { Node as NodeDS, NodeData as NodeDSData } from '../../practical/data-structures/Node';
 import { PathfindingAlgorithm } from '../../practical/algorithms/types';
 import DFS from '../../practical/algorithms/DFS';
+import BFS from '../../practical/algorithms/BFS';
 import Dijkstra from '../../practical/algorithms/Dijkstra';
 import AStar from '../../practical/algorithms/AStar';
 import './App.css';
@@ -327,6 +328,13 @@ function App() {
             onClick={() => visualizeAlgorithm(DFS)}
           >
             Depth-first Search
+          </button>
+          <button
+            type="button"
+            className="action"
+            onClick={() => visualizeAlgorithm(BFS)}
+          >
+            Breadth-first Search
           </button>
           <button
             type="button"
