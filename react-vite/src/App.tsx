@@ -8,6 +8,7 @@ import Node, { NodeType } from './Node';
 import { calculateDefaultNodePositions, calculateGridDimension } from './utils/dimension';
 import { Node as NodeDS, NodeData as NodeDSData } from '../../practical/data-structures/Node';
 import { PathfindingAlgorithm } from '../../practical/algorithms/types';
+import DFS from '../../practical/algorithms/DFS';
 import Dijkstra from '../../practical/algorithms/Dijkstra';
 import AStar from '../../practical/algorithms/AStar';
 import './App.css';
@@ -320,6 +321,13 @@ function App() {
         <h2>Controls</h2>
 
         <div className="algorithms">
+          <button
+            type="button"
+            className="action"
+            onClick={() => visualizeAlgorithm(DFS)}
+          >
+            Depth-first Search
+          </button>
           <button
             type="button"
             className="action"

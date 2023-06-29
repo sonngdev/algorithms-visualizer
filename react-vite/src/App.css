@@ -126,7 +126,7 @@
 .actions .algorithms {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  column-gap: var(--spacing-sm);
+  gap: var(--spacing-sm);
   width: 100%;
   margin-top: var(--spacing-md);
 }
