@@ -1,30 +1,19 @@
-import { Node } from '../data-structures/Node';
+import { Node, NodeData } from '../data-structures/Node';
+import { CreateGridDataFn, PathfindingAlgorithm, PerformAlgorithmFn } from './types';
 
-interface AStarResult<T> {
-  shortestPath: Node<T>[];
-  visitedNodes: Node<T>[];
-}
-
-interface AStarNodeData {
-  row: number;
-  col: number;
+interface AStarNodeData extends NodeData {
   fScore: number; // Total cost
   gScore: number; // Cost to traverse from start node to this node
   hScore: number; // Heuristic (estimated cost from this node to end node)
 }
 
-interface NodePosition {
-  row: number;
-  col: number;
-}
-
-export function createGridData(
-  rows: number,
-  cols: number,
-  startNodePos: NodePosition,
-  endNodePos: NodePosition,
-  wallPositions: NodePosition[],
-) {
+export const createGridData: CreateGridDataFn<AStarNodeData> = (
+  rows,
+  cols,
+  startNodePosition,
+  endNodePosition,
+  wallPositions,
+) => {
   let grid: Node<AStarNodeData>[][] = [];
   let startNode: Node<AStarNodeData> | null = null;
   let endNode: Node<AStarNodeData> | null = null;
@@ -52,9 +41,9 @@ export function createGridData(
 
       row.push(node);
 
-      if (i === startNodePos.row && j === startNodePos.col) {
+      if (i === startNodePosition.row && j === startNodePosition.col) {
         startNode = node;
-      } else if (i === endNodePos.row && j === endNodePos.col) {
+      } else if (i === endNodePosition.row && j === endNodePosition.col) {
         endNode = node;
       }
     }
@@ -83,13 +72,13 @@ export function calculateHeuristic<T extends AStarNodeData>(
 /**
  * Pseudo code: https://en.wikipedia.org/wiki/A*_search_algorithm
  */
-export function performAlgorithm<T extends AStarNodeData>(
-  grid: Node<T>[],
-  startNode: Node<T>,
-  endNode: Node<T>,
-): AStarResult<T> {
-  const shortestPath: Node<T>[] = [];
-  const visitedNodes: Node<T>[] = [];
+export const performAlgorithm: PerformAlgorithmFn<AStarNodeData> = (
+  grid,
+  startNode,
+  endNode,
+) => {
+  const shortestPath: Node<AStarNodeData>[] = [];
+  const visitedNodes: Node<AStarNodeData>[] = [];
 
   for (let node of grid) {
     node.data.gScore = node === startNode ? 0 : Infinity;
@@ -98,7 +87,7 @@ export function performAlgorithm<T extends AStarNodeData>(
     node.previousNode = null;
   }
 
-  const openSet: Node<T>[] = [startNode];
+  const openSet: Node<AStarNodeData>[] = [startNode];
 
   while (openSet.length > 0) {
     // debugger;
@@ -143,7 +132,7 @@ export function performAlgorithm<T extends AStarNodeData>(
   return { shortestPath, visitedNodes };
 }
 
-const AStar = {
+const AStar: PathfindingAlgorithm<AStarNodeData> = {
   createGridData,
   performAlgorithm,
 };

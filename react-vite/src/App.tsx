@@ -6,7 +6,8 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 import Node, { NodeType } from './Node';
 import { calculateDefaultNodePositions, calculateGridDimension } from './utils/dimension';
-import { Node as NodeDS } from '../../practical/data-structures/Node';
+import { Node as NodeDS, NodeData as NodeDSData } from '../../practical/data-structures/Node';
+import { PathfindingAlgorithm } from '../../practical/algorithms/types';
 import Dijkstra from '../../practical/algorithms/Dijkstra';
 import AStar from '../../practical/algorithms/AStar';
 import './App.css';
@@ -138,10 +139,10 @@ function App() {
     }
   };
 
-  const visualizeDijkstra = () => {
+  const visualizeAlgorithm = <T extends NodeDSData>(algorithm: PathfindingAlgorithm<T>) => {
     clearVisualizedPath();
 
-    const { grid, startNode, endNode } = Dijkstra.createGridData(
+    const { grid, startNode, endNode } = algorithm.createGridData(
       NUM_ROWS,
       NUM_COLS,
       startNodePos,
@@ -152,35 +153,13 @@ function App() {
       return;
     }
 
-    const { visitedNodes, shortestPath } = Dijkstra.performAlgorithm(
+    const { visitedNodes, shortestPath } = algorithm.performAlgorithm(
       grid.flat(),
       startNode,
       endNode,
     );
     animateAlgorithm(visitedNodes, shortestPath);
-  };
-
-  const visualizeAStar = () => {
-    clearVisualizedPath();
-
-    const { grid, startNode, endNode } = AStar.createGridData(
-      NUM_ROWS,
-      NUM_COLS,
-      startNodePos,
-      endNodePos,
-      getWallPositions(),
-    );
-    if (!startNode || !endNode) {
-      return;
-    }
-
-    const { visitedNodes, shortestPath } = AStar.performAlgorithm(
-      grid.flat(),
-      startNode,
-      endNode,
-    );
-    animateAlgorithm(visitedNodes, shortestPath);
-  };
+  }
 
   //-------------Moving start/end nodes-------------//
 
@@ -344,11 +323,15 @@ function App() {
           <button
             type="button"
             className="action"
-            onClick={visualizeDijkstra}
+            onClick={() => visualizeAlgorithm(Dijkstra)}
           >
             Dijkstra's Algorithm
           </button>
-          <button type="button" className="action" onClick={visualizeAStar}>
+          <button
+            type="button"
+            className="action"
+            onClick={() => visualizeAlgorithm(AStar)}
+          >
             A* Algorithm
           </button>
         </div>

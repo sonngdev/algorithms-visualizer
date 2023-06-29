@@ -1,29 +1,18 @@
-import { Node } from '../data-structures/Node';
+import { Node, NodeData } from '../data-structures/Node';
+import { CreateGridDataFn, PathfindingAlgorithm, PerformAlgorithmFn } from './types';
 
-interface DijkstraResult<T> {
-  shortestPath: Node<T>[];
-  visitedNodes: Node<T>[];
-}
-
-interface DijkstraNodeData {
-  row: number;
-  col: number;
+interface DijkstraNodeData extends NodeData {
   distance: number;
   isVisited: boolean;
 }
 
-interface NodePosition {
-  row: number;
-  col: number;
-}
-
-export function createGridData(
-  rows: number,
-  cols: number,
-  startNodePosition: NodePosition,
-  endNodePosition: NodePosition,
-  wallPositions: NodePosition[],
-) {
+export const createGridData: CreateGridDataFn<DijkstraNodeData> = (
+  rows,
+  cols,
+  startNodePosition,
+  endNodePosition,
+  wallPositions,
+) => {
   let grid: Node<DijkstraNodeData>[][] = [];
   let startNode: Node<DijkstraNodeData> | null = null;
   let endNode: Node<DijkstraNodeData> | null = null;
@@ -67,13 +56,13 @@ export function createGridData(
   return { grid, startNode, endNode };
 }
 
-export function performAlgorithm<T extends DijkstraNodeData>(
-  grid: Node<T>[],
-  originNode: Node<T>,
-  destinationNode: Node<T>,
-): DijkstraResult<T> {
-  const shortestPath: Node<T>[] = [];
-  const visitedNodes: Node<T>[] = [];
+export const performAlgorithm: PerformAlgorithmFn<DijkstraNodeData> = (
+  grid,
+  originNode,
+  destinationNode,
+) => {
+  const shortestPath: Node<DijkstraNodeData>[] = [];
+  const visitedNodes: Node<DijkstraNodeData>[] = [];
 
   for (let node of grid) {
     if (node === originNode) {
@@ -133,7 +122,7 @@ export function performAlgorithm<T extends DijkstraNodeData>(
   return { shortestPath, visitedNodes };
 }
 
-const Dijkstra = {
+const Dijkstra: PathfindingAlgorithm<DijkstraNodeData> = {
   createGridData,
   performAlgorithm,
 };
