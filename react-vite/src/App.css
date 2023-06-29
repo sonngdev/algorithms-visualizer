@@ -251,6 +251,7 @@ footer a, footer a:visited {
 
   .main-grid {
     grid-area: grid;
+    align-self: stretch;
   }
 
   .main-grid .legends {
