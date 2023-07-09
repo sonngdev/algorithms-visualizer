@@ -393,7 +393,7 @@ function App() {
           <ul>
             <li>
               <div>
-                Try dragging the start/end node to a new position.
+                Try dragging the start/end nodes to a new position.
               </div>
             </li>
             <li>
