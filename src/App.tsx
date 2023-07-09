@@ -380,12 +380,12 @@ function App() {
           <ul>
             <li>
               <div>
-                See this site on desktop with a mouse to see extra features.
+                View this site on desktop to see extra features.
               </div>
             </li>
             <li>
               <div>
-                Tap on a white node and drag to create a wall.
+                Tap on a white node to toggle a wall.
               </div>
             </li>
           </ul>
@@ -393,7 +393,7 @@ function App() {
           <ul>
             <li>
               <div>
-                Try dragging the start/end nodes to a new position.
+                Try dragging the start/end nodes to new positions.
               </div>
             </li>
             <li>
@@ -403,7 +403,7 @@ function App() {
             </li>
             <li>
               <div>
-                Hold <code>ctrl</code>/<code>cmd</code> and click on a node to toggle a wall.
+                Hold <code>ctrl</code>/<code>cmd</code> and click on a white node to toggle a wall.
               </div>
             </li>
           </ul>
