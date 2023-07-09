@@ -2,7 +2,7 @@
   <img src="https://res.cloudinary.com/dh7qbp6sy/image/upload/v1688903694/algorithm-visualizer/Logo_with_shadow_cjqli2.png" width="300px">
 </p>
 
-<h1 align="center">Algorithm Visualizer</h1>
+<h1 align="center">Algorithms Visualizer</h1>
 <p align="center">
   Visualization of common pathfinding algorithms 🧭 🗺️
 <p>
