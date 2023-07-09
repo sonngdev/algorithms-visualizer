@@ -1,5 +1,5 @@
 import { MouseEvent, useEffect, useState } from 'react';
-import { DragState } from './App';
+import { DragState } from '../App';
 import './Node.css';
 
 export enum NodeType {

@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub, faLinkedin, faTwitterSquare } from '@fortawesome/free-brands-svg-icons';
 import { faHeart, faGlobe } from '@fortawesome/free-solid-svg-icons';
 
-import Node, { NodeType } from './Node';
+import Node, { NodeType } from './components/Node';
 import { calculateDefaultNodePositions, calculateGridDimension } from './utils/dimension';
 import { Node as NodeDS, NodeData as NodeDSData } from '../../practical/data-structures/Node';
 import { PathfindingAlgorithm } from '../../practical/algorithms/types';
