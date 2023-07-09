@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://res.cloudinary.com/dh7qbp6sy/image/upload/v1688901458/algorithm-visualizer/algorithm-visualizer-logo_mgflck.png" width="400px">
+  <img src="https://res.cloudinary.com/dh7qbp6sy/image/upload/v1688903694/algorithm-visualizer/Logo_with_shadow_cjqli2.png" width="300px">
 </p>
 
 <h1 align="center">Algorithm Visualizer</h1>
@@ -18,31 +18,27 @@
 - 🧱 Allow walls creation.
 - 📞 Works on mobile as well, however some features are available on desktop only.
 
+## Screenshots
+
+<p align="center"><b>Depth-first Search</b></p>
 <p align="center">
-  <figure>
   <img
-    src="https://res.cloudinary.com/dh7qbp6sy/image/upload/v1688902745/algorithm-visualizer/dfs_b9zrs5.png"
-    alt="Visualization of Depth-first Search algorithm">
-  <figcaption align="center"><em>Depth-first Search</em></figcaption>
-</figure>
+    src="https://res.cloudinary.com/dh7qbp6sy/image/upload/v1688904335/algorithm-visualizer/dfs_zgzavb.png"
+    alt="Visualization of Depth-first Search algorithm" width="600px">
 <p align="center">
 
+<p align="center"><b>Dijkstra's algorithm</b></p>
 <p align="center">
-  <figure>
   <img
-    src="https://res.cloudinary.com/dh7qbp6sy/image/upload/v1688902745/algorithm-visualizer/dijkstra_s6ximc.png"
-    alt="Visualization of Dijkstra's algorithm">
-  <figcaption align="center"><em>Dijkstra's algorithm</em></figcaption>
-</figure>
+    src="https://res.cloudinary.com/dh7qbp6sy/image/upload/v1688904335/algorithm-visualizer/dijkstra_mifmnz.png"
+    alt="Visualization of Dijkstra's algorithm" width="600px">
 <p align="center">
 
+<p align="center"><b>A*</b></p>
 <p align="center">
-  <figure>
   <img
-    src="https://res.cloudinary.com/dh7qbp6sy/image/upload/v1688902745/algorithm-visualizer/astar_qyvrp2.png"
-    alt="Visualization of A-Star algorithm">
-  <figcaption align="center"><em>A*</em></figcaption>
-</figure>
+    src="https://res.cloudinary.com/dh7qbp6sy/image/upload/v1688904335/algorithm-visualizer/astar_f0moqn.png"
+    alt="Visualization of A-Star algorithm" width="600px">
 <p align="center">
 
 ## Cloning this repo
