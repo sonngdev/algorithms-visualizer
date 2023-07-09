@@ -283,7 +283,7 @@ footer a, footer a:visited {
 
   .tips {
     grid-area: tips;
-    align-self: start;
+    align-self: stretch;
   }
 
   footer {

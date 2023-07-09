@@ -3,6 +3,7 @@ import produce from 'immer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub, faLinkedinIn, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { faHeart, faGlobe } from '@fortawesome/free-solid-svg-icons';
+import { isMobile } from 'react-device-detect';
 
 import Node, { NodeType } from './components/Node';
 import { calculateDefaultNodePositions, calculateGridDimension } from './utils/dimension';
@@ -375,28 +376,38 @@ function App() {
 
       <div className="tips">
         <h2>Tips</h2>
-        <ul>
-          <li>
-            <div>
-              See this site on desktop with a mouse for the best experience.
-            </div>
-          </li>
-          <li>
-            <div>
-              Try dragging the start/end node to a new position.
-            </div>
-          </li>
-          <li>
-            <div>
-              Click on a white node and drag to create walls quickly.
-            </div>
-          </li>
-          <li>
-            <div>
-              Hold <code>ctrl</code>/<code>cmd</code> and click on a node to toggle a wall.
-            </div>
-          </li>
-        </ul>
+        {isMobile ? (
+          <ul>
+            <li>
+              <div>
+                See this site on desktop with a mouse to see extra features.
+              </div>
+            </li>
+            <li>
+              <div>
+                Tap on a white node and drag to create a wall.
+              </div>
+            </li>
+          </ul>
+        ) : (
+          <ul>
+            <li>
+              <div>
+                Try dragging the start/end node to a new position.
+              </div>
+            </li>
+            <li>
+              <div>
+                Click on a white node and drag to create walls quickly.
+              </div>
+            </li>
+            <li>
+              <div>
+                Hold <code>ctrl</code>/<code>cmd</code> and click on a node to toggle a wall.
+              </div>
+            </li>
+          </ul>
+        )}
       </div>
 
       <footer>
