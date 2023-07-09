@@ -388,12 +388,12 @@ function App() {
           </li>
           <li>
             <div>
-              Click on a node to toggle a wall.
+              Click on a white node and drag to create walls quickly.
             </div>
           </li>
           <li>
             <div>
-              Hold Shift and left mouse at the same time to create walls quickly.
+              Hold <code>ctrl</code>/<code>cmd</code> and click on a node to toggle a wall.
             </div>
           </li>
         </ul>

@@ -81,26 +81,26 @@ export default function Node({
 
   // Click a node to toggle a wall
   const handleClick = (event: MouseEvent<HTMLDivElement>) => {
-    if (type === NodeType.MIDDLE && !event.shiftKey) {
+    if (type === NodeType.MIDDLE && event.metaKey) {
       onClick(row, col);
     }
   };
 
   // Mouse down and drag to create walls quickly
   const handleMouseDown = (event: MouseEvent<HTMLDivElement>) => {
-    if (type === NodeType.MIDDLE && event.shiftKey) {
+    if (type === NodeType.MIDDLE && !event.metaKey) {
       onMouseDown(row, col);
     }
   };
 
   const handleMouseEnter = (event: MouseEvent<HTMLDivElement>) => {
-    if (type === NodeType.MIDDLE && event.shiftKey) {
+    if (type === NodeType.MIDDLE && !event.metaKey) {
       onMouseEnter(row, col);
     }
   };
 
   const handleMouseUp = (event: MouseEvent<HTMLDivElement>) => {
-    if (event.shiftKey) {
+    if (!event.metaKey) {
       onMouseUp();
     }
   };

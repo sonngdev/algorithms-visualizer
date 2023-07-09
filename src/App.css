@@ -178,6 +178,13 @@
   color: var(--color-accent-1);
 }
 
+code {
+  background-color: var(--color-background);
+  padding: 0.1rem 0.25rem;
+  border-radius: 0.25rem;
+  font-weight: bold;
+}
+
 footer {
   width: 100%;
   display: flex;
