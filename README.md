@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://res.cloudinary.com/dh7qbp6sy/image/upload/v1688903694/algorithms-visualizer/Logo_with_shadow_cjqli2.png" width="300px">
+  <img src="https://res.cloudinary.com/dh7qbp6sy/image/upload/v1688903694/algorithm-visualizer/Logo_with_shadow_cjqli2.png" width="300px">
 </p>
 
 <h1 align="center">Algorithms Visualizer</h1>
@@ -23,21 +23,21 @@
 <p align="center"><b>Depth-first Search</b></p>
 <p align="center">
   <img
-    src="https://res.cloudinary.com/dh7qbp6sy/image/upload/v1688904335/algorithms-visualizer/dfs_zgzavb.png"
+    src="https://res.cloudinary.com/dh7qbp6sy/image/upload/v1688904335/algorithm-visualizer/dfs_zgzavb.png"
     alt="Visualization of Depth-first Search algorithm" width="600px">
 <p align="center">
 
 <p align="center"><b>Dijkstra's algorithm</b></p>
 <p align="center">
   <img
-    src="https://res.cloudinary.com/dh7qbp6sy/image/upload/v1688904335/algorithms-visualizer/dijkstra_mifmnz.png"
+    src="https://res.cloudinary.com/dh7qbp6sy/image/upload/v1688904335/algorithm-visualizer/dijkstra_mifmnz.png"
     alt="Visualization of Dijkstra's algorithm" width="600px">
 <p align="center">
 
 <p align="center"><b>A*</b></p>
 <p align="center">
   <img
-    src="https://res.cloudinary.com/dh7qbp6sy/image/upload/v1688904335/algorithms-visualizer/astar_f0moqn.png"
+    src="https://res.cloudinary.com/dh7qbp6sy/image/upload/v1688904335/algorithm-visualizer/astar_f0moqn.png"
     alt="Visualization of A-Star algorithm" width="600px">
 <p align="center">
 
