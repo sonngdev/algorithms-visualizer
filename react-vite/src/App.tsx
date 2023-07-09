@@ -1,8 +1,8 @@
 import { DragEventHandler, useMemo, useRef, useState } from 'react';
 import produce from 'immer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGithub } from '@fortawesome/free-brands-svg-icons';
-import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { faGithub, faLinkedin, faTwitterSquare } from '@fortawesome/free-brands-svg-icons';
+import { faHeart, faGlobe } from '@fortawesome/free-solid-svg-icons';
 
 import Node, { NodeType } from './Node';
 import { calculateDefaultNodePositions, calculateGridDimension } from './utils/dimension';
@@ -402,8 +402,17 @@ function App() {
       <footer>
         <div>Created with <FontAwesomeIcon icon={faHeart} className="icon" /> by Son Nguyen</div>
         <div className="contacts">
+          <a href="https://www.sonng.dev/" target="_blank" rel="noopener noreferrer">
+            <FontAwesomeIcon icon={faGlobe} size="lg" />
+          </a>
           <a href="https://github.com/thanhsonng" target="_blank" rel="noopener noreferrer">
             <FontAwesomeIcon icon={faGithub} size="xl" />
+          </a>
+          <a href="https://www.linkedin.com/in/thanhsonng/" target="_blank" rel="noopener noreferrer">
+            <FontAwesomeIcon icon={faLinkedin} size="xl" />
+          </a>
+          <a href="https://twitter.com/thanhsonng211" target="_blank" rel="noopener noreferrer">
+            <FontAwesomeIcon icon={faTwitterSquare} size="xl" />
           </a>
         </div>
       </footer>
