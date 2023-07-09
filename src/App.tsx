@@ -1,7 +1,7 @@
 import { DragEventHandler, useMemo, useRef, useState } from 'react';
 import produce from 'immer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGithub, faLinkedin, faTwitterSquare } from '@fortawesome/free-brands-svg-icons';
+import { faGithub, faLinkedinIn, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { faHeart, faGlobe } from '@fortawesome/free-solid-svg-icons';
 
 import Node, { NodeType } from './components/Node';
@@ -409,10 +409,10 @@ function App() {
             <FontAwesomeIcon icon={faGithub} size="xl" />
           </a>
           <a href="https://www.linkedin.com/in/thanhsonng/" target="_blank" rel="noopener noreferrer">
-            <FontAwesomeIcon icon={faLinkedin} size="xl" />
+            <FontAwesomeIcon icon={faLinkedinIn} size="xl" />
           </a>
           <a href="https://twitter.com/thanhsonng211" target="_blank" rel="noopener noreferrer">
-            <FontAwesomeIcon icon={faTwitterSquare} size="xl" />
+            <FontAwesomeIcon icon={faTwitter} size="xl" />
           </a>
         </div>
       </footer>
