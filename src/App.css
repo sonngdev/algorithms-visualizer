@@ -190,6 +190,7 @@ footer {
 footer .icon {
   margin-left: 0.2em;
   margin-right: 0.2em;
+  color: var(--color-accent-3);
 }
 
 footer .contacts {
