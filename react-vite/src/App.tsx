@@ -6,12 +6,12 @@ import { faHeart, faGlobe } from '@fortawesome/free-solid-svg-icons';
 
 import Node, { NodeType } from './components/Node';
 import { calculateDefaultNodePositions, calculateGridDimension } from './utils/dimension';
-import { Node as NodeDS, NodeData as NodeDSData } from '../../practical/data-structures/Node';
-import { PathfindingAlgorithm } from '../../practical/algorithms/types';
-import DFS from '../../practical/algorithms/DFS';
-import BFS from '../../practical/algorithms/BFS';
-import Dijkstra from '../../practical/algorithms/Dijkstra';
-import AStar from '../../practical/algorithms/AStar';
+import { Node as NodeDS, NodeData as NodeDSData } from './data-structures/Node';
+import { PathfindingAlgorithm } from './algorithms/types';
+import DFS from './algorithms/DFS';
+import BFS from './algorithms/BFS';
+import Dijkstra from './algorithms/Dijkstra';
+import AStar from './algorithms/AStar';
 import './App.css';
 
 type NodeState = {
