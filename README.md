@@ -27,14 +27,14 @@
     alt="Visualization of Depth-first Search algorithm" width="600px">
 <p align="center">
 
-<p align="center"><b>Dijkstra's algorithm</b></p>
+<p align="center"><b>Dijkstra's Algorithm</b></p>
 <p align="center">
   <img
     src="https://res.cloudinary.com/dh7qbp6sy/image/upload/v1688904335/algorithm-visualizer/dijkstra_mifmnz.png"
     alt="Visualization of Dijkstra's algorithm" width="600px">
 <p align="center">
 
-<p align="center"><b>A*</b></p>
+<p align="center"><b>A* Algorithm</b></p>
 <p align="center">
   <img
     src="https://res.cloudinary.com/dh7qbp6sy/image/upload/v1688904335/algorithm-visualizer/astar_f0moqn.png"
