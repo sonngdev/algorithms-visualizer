@@ -9,7 +9,7 @@
 
 <p align="center">
   <a href="https://algorithms.sonng.dev/">Website</a> 🔗
-</p
+</p>
 
 ## Features
 
