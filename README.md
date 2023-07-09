@@ -16,7 +16,7 @@
 - 🗺️ Visualize common pathfinding algorithms: DFS, BFS, Dijkstra, A*.
 - 🧭 Move start/end nodes freely to see optimal path changes.
 - 🧱 Allow walls creation.
-- 📞 Works on mobile as well, however some features are available on desktop only.
+- 📞 Work on mobile, however some features are available on desktop only.
 
 ## Screenshots
 
@@ -41,7 +41,7 @@
     alt="Visualization of A-Star algorithm" width="600px">
 <p align="center">
 
-## Cloning this repo
+## Clone this repo
 
 ```bash
 git clone git@github.com:thanhsonng/algorithms-visualizer.git
