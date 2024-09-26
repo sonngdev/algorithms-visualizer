@@ -44,12 +44,12 @@
 ## Clone this repo
 
 ```bash
-git clone git@github.com:thanhsonng/algorithms-visualizer.git
+git clone git@github.com:sonngdev/algorithms-visualizer.git
 cd algorithms-visualizer
 npm install
 npm run dev
 ```
 
 ## Author
-[Son Nguyen](https://github.com/thanhsonng).
+[Son Nguyen](https://github.com/sonngdev).
 Check out my [website](https://www.sonng.dev/).

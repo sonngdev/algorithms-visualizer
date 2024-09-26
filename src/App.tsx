@@ -230,11 +230,11 @@ function App() {
       <header className="title">
         <h1>Pathfinding Algorithms Visualizer</h1>
         <div className="mobile">
-          Check out on <a href="https://github.com/thanhsonng/algorithm-visualizer" target="_blank" rel="noopener noreferrer">GitHub</a>
+          Check out on <a href="https://github.com/sonngdev/algorithms-visualizer" target="_blank" rel="noopener noreferrer">GitHub</a>
           <FontAwesomeIcon icon={faGithub} size="lg" className="icon" />
         </div>
         <div className="desktop">
-          <a href="https://github.com/thanhsonng/algorithm-visualizer" target="_blank" rel="noopener noreferrer">
+          <a href="https://github.com/sonngdev/algorithms-visualizer" target="_blank" rel="noopener noreferrer">
             <FontAwesomeIcon icon={faGithub} size="xl" className="icon" />
           </a>
         </div>
@@ -416,10 +416,10 @@ function App() {
           <a href="https://www.sonng.dev/" target="_blank" rel="noopener noreferrer">
             <FontAwesomeIcon icon={faGlobe} size="lg" />
           </a>
-          <a href="https://github.com/thanhsonng" target="_blank" rel="noopener noreferrer">
+          <a href="https://github.com/sonngdev" target="_blank" rel="noopener noreferrer">
             <FontAwesomeIcon icon={faGithub} size="xl" />
           </a>
-          <a href="https://www.linkedin.com/in/thanhsonng/" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.linkedin.com/in/sonngdev/" target="_blank" rel="noopener noreferrer">
             <FontAwesomeIcon icon={faLinkedinIn} size="xl" />
           </a>
           <a href="https://twitter.com/thanhsonng211" target="_blank" rel="noopener noreferrer">
